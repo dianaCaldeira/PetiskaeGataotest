@@ -1,4 +1,6 @@
-### 1. Configuração de SEO e Meta Tags com o Componente `Head` do Next.js
+# Site Petiska & Gatão - Guia de SEO e Performance
+
+## 1. Configuração de SEO e Meta Tags com o Componente `Head` do Next.js
 
 Com Next.js, você pode usar o componente `Head` nativo do Next.js para gerenciar meta tags, que é otimizado para SSR/SSG.
 
@@ -21,7 +23,7 @@ Com Next.js, você pode usar o componente `Head` nativo do Next.js para gerencia
     }
     ```
 
-### 2. Otimização de Imagens com o Componente `Image` do Next.js
+## 2. Otimização de Imagens com o Componente `Image` do Next.js
 
 O Next.js possui um componente `Image` otimizado que lida com responsividade, lazy loading e formatos modernos (como WebP) automaticamente.
 
@@ -43,7 +45,7 @@ O Next.js possui um componente `Image` otimizado que lida com responsividade, la
     }
     ```
 
-### 3. Otimizações de SEO Implementadas (Conceitual)
+## 3. Otimizações de SEO Implementadas (Conceitual)
 
 Estas são práticas que você implementará utilizando as ferramentas acima e as melhores práticas de desenvolvimento:
 
@@ -51,19 +53,19 @@ Estas são práticas que você implementará utilizando as ferramentas acima e a
 *   **Schema.org (Structured Data)**: Implemente schemas como LocalBusiness, Physician, MedicalService, BreadcrumbList, Blog, etc., para melhorar a indexação nos motores de busca.
 *   **Arquivos Técnicos**: Configure um `robots.txt` avançado, `sitemap.xml` dinâmico e `manifest.json` para PWA.
 
-### 4. Otimizações de Performance (Conceitual)
+## 4. Otimizações de Performance (Conceitual)
 
 *   **Web Vitals**: Monitore métricas como LCP, FID, CLS, FCP e TTFB utilizando a biblioteca Web Vitals.
 *   **Imagens**: Utilize o componente `Image` do Next.js para otimização automática. Para outros assets, implemente Lazy Loading e `srcset` para imagens responsivas.
 *   **Fontes**: Adote a estratégia `font-display: swap` e preloade fontes críticas para melhorar o tempo de carregamento.
 *   **Service Worker**: Configure estratégias de cache para navegação offline, transformando sua aplicação em uma PWA.
 
-### 5. Analytics e Conversão (Conceitual)
+## 5. Analytics e Conversão (Conceitual)
 
 *   **Eventos Customizados**: Utilize o Google Tag Manager para rastrear eventos como `booking_completed`, `slot_selected`, `contact_click`, `scroll_depth`, `form_complete` e `conversion`.
 *   **Rastreamento de Conversão**: Configure o rastreamento de conversões para plataformas como Doctoralia, WhatsApp e formulários de contato.
 
-### ✅ STATUS GERAL
+## ✅ STATUS GERAL
 
 *   ✅ **Framework:** Next.js (React 19.1.1 + TypeScript 5.5)
 *   ✅ **Estilização:** Tailwind CSS

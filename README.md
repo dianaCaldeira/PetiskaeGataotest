@@ -41,7 +41,7 @@ Website oficial da **Petiska & Gatão**, empresa brasiliense especializada em pe
 ```bash
 # Clonar o repositório
 git clone [repository-url]
-cd my-project
+cd site-petiscaegatao
 
 # Instalar dependências
 npm install
