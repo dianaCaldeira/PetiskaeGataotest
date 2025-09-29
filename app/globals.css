@@ -1,26 +1,218 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Cores do sistema baseadas no seu design */
+  --color-background: hsl(83 38% 92%); /* Verde claro de fundo dos mockups */
+  --color-foreground: hsl(140 20% 15%); /* Verde escuro para textos */
+
+  --color-card: hsl(42 100% 95%); /* Bege claro para cards */
+  --color-card-foreground: hsl(140 20% 15%);
+
+  --color-popover: hsl(42 100% 95%);
+  --color-popover-foreground: hsl(140 20% 15%);
+
+  /* Verde principal da marca */
+  --color-primary: hsl(140 35% 25%);
+  --color-primary-foreground: hsl(42 100% 95%);
+
+  /* Laranja da marca para CTAs */
+  --color-secondary: hsl(25 90% 60%);
+  --color-secondary-foreground: hsl(42 100% 95%);
+
+  --color-muted: hsl(83 25% 85%);
+  --color-muted-foreground: hsl(140 15% 40%);
+
+  /* Laranja para acentos */
+  --color-accent: hsl(25 90% 60%);
+  --color-accent-foreground: hsl(42 100% 95%);
+
+  --color-destructive: hsl(0 84.2% 60.2%);
+  --color-destructive-foreground: hsl(210 40% 98%);
+
+  --color-border: hsl(83 20% 80%);
+  --color-input: hsl(42 50% 90%);
+  --color-ring: hsl(25 90% 60%);
+
+  /* Cores especiais para pets - EXATAMENTE como você tinha */
+  --color-pet-orange: hsl(25 90% 65%); /* Laranja dos pets */
+  --color-pet-cream: hsl(42 60% 88%); /* Creme dos pets */
+  --color-leaf-green: hsl(83 40% 75%); /* Verde das folhas */
+  --color-warm-beige: hsl(42 40% 85%); /* Bege quentinho */
+
+  /* Border radius - bordas arredondadas como nos mockups */
+  --radius: 1.5rem;
+  --radius-lg: 1.5rem;
+  --radius-md: calc(1.5rem - 2px);
+  --radius-sm: calc(1.5rem - 4px);
+
+  /* Fontes */
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-display: "Poppins", system-ui, sans-serif;
+
+  /* Container */
+  --container-center: true;
+  --container-padding: 2rem;
+  --container-screens-2xl: 1400px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* Gradientes orgânicos - EXATAMENTE como você tinha */
+    --gradient-primary: linear-gradient(135deg, hsl(83 38% 92%), hsl(83 45% 85%));
+    --gradient-accent: linear-gradient(135deg, hsl(25 90% 60%), hsl(25 95% 55%));
+    --gradient-card: linear-gradient(135deg, hsl(42 100% 95%), hsl(42 80% 90%));
+
+    /* Sombras suaves - EXATAMENTE como você tinha */
+    --shadow-soft: 0 4px 20px hsl(140 35% 25% / 0.1);
+    --shadow-card: 0 8px 30px hsl(140 35% 25% / 0.08);
+    --shadow-button: 0 6px 25px hsl(25 90% 60% / 0.25);
+
+    /* Animações - EXATAMENTE como você tinha */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --bounce-gentle: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  .dark {
+    --color-background: hsl(140 20% 8%);
+    --color-foreground: hsl(83 38% 92%);
+    --color-card: hsl(140 15% 12%);
+    --color-card-foreground: hsl(83 38% 92%);
+    --color-primary: hsl(83 45% 70%);
+    --color-primary-foreground: hsl(140 20% 8%);
+    --color-secondary: hsl(25 90% 60%);
+    --color-secondary-foreground: hsl(140 20% 8%);
+  }
+
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Scrollbar personalizada - EXATAMENTE como você tinha */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: var(--color-background);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--color-accent);
+    border-radius: 9999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: hsl(25 90% 60% / 0.8);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  /* Seus estilos customizados do index.css */
+  #root {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+  }
+
+  .logo {
+    height: 6em;
+    padding: 1.5em;
+    will-change: filter;
+    transition: filter 300ms;
+  }
+
+  .logo:hover {
+    filter: drop-shadow(0 0 2em #646cffaa);
+  }
+
+  .logo.react:hover {
+    filter: drop-shadow(0 0 2em #61dafbaa);
+  }
+
+  .card {
+    padding: 2em;
+  }
+
+  .read-the-docs {
+    color: #888;
+  }
+
+  /* Animações - EXATAMENTE como você tinha */
+  @keyframes logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    a:nth-of-type(2) .logo {
+      animation: logo-spin infinite 20s linear;
+    }
+  }
+
+  /* Utilitários personalizados - EXATAMENTE como você tinha */
+  .bg-gradient-primary {
+    background-image: var(--gradient-primary);
+  }
+
+  .bg-gradient-accent {
+    background-image: var(--gradient-accent);
+  }
+
+  .bg-gradient-card {
+    background-image: var(--gradient-card);
+  }
+
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+
+  .shadow-button {
+    box-shadow: var(--shadow-button);
+  }
+
+  .transition-bounce-gentle {
+    transition-timing-function: var(--bounce-gentle);
+  }
+
+  .accordion-down {
+    animation: accordion-down 0.2s ease-out;
+  }
+
+  .accordion-up {
+    animation: accordion-up 0.2s ease-out;
+  }
 }

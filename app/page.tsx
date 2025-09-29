@@ -1,103 +1,159 @@
-import Image from "next/image";
+"use client";
+
+import React from 'react';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Heart, MapPin, Award, Leaf, ShoppingBag, CheckCircle } from 'lucide-react';
 
 export default function Home() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="min-h-screen bg-gradient-primary">
+      {/* Hero Section */}
+      <section className="py-20 px-4">
+        <div className="max-w-7xl mx-auto">
+          <div className="relative bg-card rounded-3xl p-8 md:p-16 shadow-card">
+            {/* Elementos decorativos */}
+            <div className="absolute top-0 left-0 w-32 h-32 bg-leaf-green/20 rounded-full -translate-x-16 -translate-y-16"></div>
+            <div className="absolute bottom-0 right-0 w-40 h-40 bg-pet-orange/20 rounded-full translate-x-20 translate-y-20"></div>
+            
+            <div className="relative z-10 text-center">
+              <Badge className="bg-primary text-primary-foreground px-6 py-2 mb-6 text-lg">
+                Petiska & Gatão - Desde 2023
+              </Badge>
+              
+              <h1 className="text-5xl md:text-7xl font-bold text-primary mb-6 leading-tight">
+                Petiscos <span className="text-accent">Naturais</span><br />
+                Feitos com <span className="text-accent">Amor</span>
+              </h1>
+              
+              <p className="text-xl text-muted-foreground mb-8 max-w-4xl mx-auto leading-relaxed">
+                Bem-vindo ao universo dos <strong>melhores petiscos artesanais de Brasília</strong>. 
+                Somos Ana Silva e Pedro Santos, uma empresa brasiliense dedicada exclusivamente à produção de petiscos 
+                <strong> 100% naturais</strong> para cães e gatos, criados com ingredientes 
+                cuidadosamente selecionados e muito amor por nossos amigos de quatro patas.
+              </p>
+              
+              {/* Value Props */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+                <div className="bg-primary/10 rounded-2xl p-6 text-center">
+                  <div className="text-3xl font-bold text-primary mb-2">100%</div>
+                  <div className="text-sm text-muted-foreground font-medium">Natural & Artesanal</div>
+                </div>
+                <div className="bg-accent/10 rounded-2xl p-6 text-center">
+                  <div className="text-3xl font-bold text-primary mb-2">50+</div>
+                  <div className="text-sm text-muted-foreground font-medium">Pet Shops Parceiros</div>
+                </div>
+                <div className="bg-warm-beige/30 rounded-2xl p-6 text-center">
+                  <div className="text-3xl font-bold text-primary mb-2">5.000+</div>
+                  <div className="text-sm text-muted-foreground font-medium">Pets Felizes em Brasília</div>
+                </div>
+              </div>
+              
+              {/* Pets Illustration */}
+              <div className="flex justify-center items-center my-12">
+                <div className="relative">
+                  <div className="w-32 h-32 bg-leaf-green/30 rounded-full flex items-center justify-center">
+                    <Leaf className="w-12 h-12 text-primary" />
+                  </div>
+                </div>
+              </div>
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
+                <Link href="/onde-encontrar">
+                  <Button variant="hero" size="xl" className="text-lg px-8 py-6">
+                    <MapPin className="w-6 h-6 mr-3" />
+                    Onde Encontrar em Brasília
+                  </Button>
+                </Link>
+                <Link href="/cadastro-parceiro">
+                  <Button variant="outline" size="xl" className="text-lg px-8 py-6">
+                    <ShoppingBag className="w-6 h-6 mr-3" />
+                    Quero Revender
+                  </Button>
+                </Link>
+              </div>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+              {/* Trust Indicators */}
+              <div className="flex flex-wrap justify-center gap-6 text-sm text-muted-foreground">
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="w-5 h-5 text-accent" />
+                  <span>Aprovado por Veterinários</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Heart className="w-5 h-5 text-accent" />
+                  <span>Sem Conservantes Artificiais</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Award className="w-5 h-5 text-accent" />
+                  <span>Produzido no Coração de Brasília</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </section>
+
+      {/* Nossa História */}
+      <section className="py-20 px-4">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-primary mb-6">
+              Por Que a Petiska & Gatão é Especial?
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Conheça nossa jornada e o que nos torna únicos no mercado de petiscos naturais de Brasília
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <h3 className="text-3xl font-bold text-primary mb-6">
+                A Paixão que Move Nossa Empresa
+              </h3>
+              <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
+                Fundada em 2023 pelos empreendedores <strong>Ana Silva</strong> e <strong>Pedro Santos</strong>, 
+                a Petiska & Gatão nasceu de uma necessidade real: encontrar petiscos verdadeiramente saudáveis 
+                e naturais para nossos próprios pets aqui em Brasília.
+              </p>
+              
+              <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+                Hoje, nossa produção 100% artesanal já conquistou mais de 50 pet shops parceiros e 
+                proporcionou alegria para milhares de cães e gatos em todo o Distrito Federal.
+              </p>
+
+              <div className="bg-warm-beige/30 rounded-3xl p-6">
+                <h4 className="text-xl font-bold text-primary mb-4">Nossos Pilares Fundamentais</h4>
+                <ul className="space-y-3">
+                  <li className="flex items-center gap-3">
+                    <CheckCircle className="w-5 h-5 text-accent flex-shrink-0" />
+                    <span className="text-muted-foreground"><strong>Transparência Total:</strong> Você pode acompanhar cada etapa do nosso processo</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <CheckCircle className="w-5 h-5 text-accent flex-shrink-0" />
+                    <span className="text-muted-foreground"><strong>Ingredientes Premium:</strong> Selecionamos apenas o melhor para seu pet</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <CheckCircle className="w-5 h-5 text-accent flex-shrink-0" />
+                    <span className="text-muted-foreground"><strong>Produção Artesanal:</strong> Cada petisco é feito com cuidado individual</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="relative">
+              <div className="bg-gradient-card rounded-3xl p-8 shadow-card">
+                <div className="text-center">
+                  <h4 className="text-2xl font-bold text-primary mb-4">Feito com Amor em Brasília</h4>
+                  <p className="text-muted-foreground">
+                    Cada petisco é uma demonstração do nosso amor pelos pets e pela nossa cidade.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
