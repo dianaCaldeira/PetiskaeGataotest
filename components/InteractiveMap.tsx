@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { Card, CardContent } from '@/components/ui/card';
@@ -159,7 +159,7 @@ const InteractiveMap = () => {
                   <ol className="text-sm text-muted-foreground space-y-1">
                     <li>1. Acesse <a href="https://mapbox.com" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">mapbox.com</a></li>
                     <li>2. Crie uma conta gratuita</li>
-                    <li>3. Vá para a seção "Tokens" no dashboard</li>
+                    <li>3. Vá para a seção &ldquo;Tokens&rdquo; no dashboard</li>
                     <li>4. Copie seu token público</li>
                   </ol>
                 </div>

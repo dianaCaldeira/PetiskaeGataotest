@@ -71,7 +71,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
     { value: 'todos', label: 'Todos' }
   ];
 
-  const handleFilterChange = (category: keyof FilterOptions, value: any) => {
+  const handleFilterChange = (category: keyof FilterOptions, value: string | string[]) => {
     const newFilters = { ...filters, [category]: value };
     setFilters(newFilters);
     onFilterChange(newFilters);

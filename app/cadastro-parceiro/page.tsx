@@ -8,12 +8,11 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
 import { Checkbox } from '@/components/ui/checkbox';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
 import { 
   Store,
   MapPin, 
-  Phone, 
-  Mail, 
   User, 
   FileText,
   CheckCircle,
@@ -33,8 +32,12 @@ interface PartnerFormData {
   address: string;
   neighborhood: string;
   city: string;
-  monthlyCustomers: string;
+  businessType: string;
   experience: string;
+  averageMonthlyPurchase: string;
+  targetMarket: string[];
+  hasPhysicalStore: boolean;
+  monthlyCustomers: string;
   expectations: string;
   acceptTerms: boolean;
 }
@@ -50,8 +53,12 @@ export default function PartnerRegistration() {
     address: '',
     neighborhood: '',
     city: 'Brasília',
-    monthlyCustomers: '',
+    businessType: '',
     experience: '',
+    averageMonthlyPurchase: '',
+    targetMarket: [],
+    hasPhysicalStore: true,
+    monthlyCustomers: '',
     expectations: '',
     acceptTerms: false
   });
@@ -59,7 +66,7 @@ export default function PartnerRegistration() {
   const [errors, setErrors] = useState<Partial<Record<keyof PartnerFormData, string>>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleInputChange = (field: keyof PartnerFormData, value: string | boolean) => {
+  const handleInputChange = (field: keyof PartnerFormData, value: string | boolean | string[]) => {
     setFormData(prev => ({ ...prev, [field]: value }));
     if (errors[field]) {
       setErrors(prev => ({ ...prev, [field]: undefined }));
@@ -91,6 +98,36 @@ export default function PartnerRegistration() {
 
     try {
       // Create WhatsApp message
+      const businessTypeLabels: Record<string, string> = {
+        'pet-shop': 'Pet Shop',
+        'veterinaria': 'Clínica Veterinária',
+        'agropecuaria': 'Agropecuária',
+        'distribuidor': 'Distribuidor',
+        'outros': 'Outros'
+      };
+
+      const experienceLabels: Record<string, string> = {
+        'menos-1-ano': 'Menos de 1 ano',
+        '1-3-anos': '1 a 3 anos',
+        '3-5-anos': '3 a 5 anos',
+        'mais-5-anos': 'Mais de 5 anos'
+      };
+
+      const purchaseLabels: Record<string, string> = {
+        'ate-500': 'Até R$ 500/mês',
+        '500-1500': 'R$ 500 a R$ 1.500/mês',
+        '1500-3000': 'R$ 1.500 a R$ 3.000/mês',
+        'acima-3000': 'Acima de R$ 3.000/mês'
+      };
+
+      const targetMarketLabels: Record<string, string> = {
+        'tutores-individuais': 'Tutores Individuais',
+        'criadores': 'Criadores',
+        'hoteis-pets': 'Hotéis para Pets',
+        'veterinarias': 'Clínicas Veterinárias',
+        'revendedores': 'Outros Revendedores'
+      };
+
       const message = `🏪 *NOVO CADASTRO DE PARCEIRO*
 
 *DADOS DO PET SHOP:*
@@ -106,11 +143,19 @@ export default function PartnerRegistration() {
 • Cidade: ${formData.city}
 
 *INFORMAÇÕES COMERCIAIS:*
+• Tipo de Negócio: ${formData.businessType ? businessTypeLabels[formData.businessType] : 'Não informado'}
+• Experiência: ${formData.experience ? experienceLabels[formData.experience] : 'Não informado'}
+• Volume de Compra: ${formData.averageMonthlyPurchase ? purchaseLabels[formData.averageMonthlyPurchase] : 'Não informado'}
+• Loja Física: ${formData.hasPhysicalStore ? 'Sim' : 'Não'}
 • Clientes/mês: ${formData.monthlyCustomers || 'Não informado'}
-• Experiência: ${formData.experience || 'Não informado'}
-• Expectativas: ${formData.expectations || 'Não informado'}
 
-*Enviado através do site da Petiska & Gatão* 🐱`;
+*PÚBLICO-ALVO:*
+${formData.targetMarket.length > 0 ? formData.targetMarket.map(market => `• ${targetMarketLabels[market]}`).join('\n') : '• Não informado'}
+
+*EXPECTATIVAS:*
+${formData.expectations || 'Não informado'}
+
+*Enviado através do site da Petiska & Gatão* �`;
 
       // Open WhatsApp
       const whatsappUrl = `https://wa.me/5561999999999?text=${encodeURIComponent(message)}`;
@@ -131,13 +176,17 @@ export default function PartnerRegistration() {
         address: '',
         neighborhood: '',
         city: 'Brasília',
-        monthlyCustomers: '',
+        businessType: '',
         experience: '',
+        averageMonthlyPurchase: '',
+        targetMarket: [],
+        hasPhysicalStore: true,
+        monthlyCustomers: '',
         expectations: '',
         acceptTerms: false
       });
 
-    } catch (error) {
+    } catch {
       toast({
         title: "Erro ao enviar cadastro",
         description: "Tente novamente ou entre em contato diretamente pelo WhatsApp.",
@@ -399,6 +448,103 @@ export default function PartnerRegistration() {
                     Informações Comerciais
                   </h3>
                   <div className="space-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                      <div>
+                        <label className="block text-sm font-medium text-foreground mb-2">
+                          Tipo de negócio
+                        </label>
+                        <Select value={formData.businessType} onValueChange={(value) => handleInputChange('businessType', value)}>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Selecione..." />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="pet-shop">Pet Shop</SelectItem>
+                            <SelectItem value="veterinaria">Clínica Veterinária</SelectItem>
+                            <SelectItem value="agropecuaria">Agropecuária</SelectItem>
+                            <SelectItem value="distribuidor">Distribuidor</SelectItem>
+                            <SelectItem value="outros">Outros</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-foreground mb-2">
+                          Experiência no setor
+                        </label>
+                        <Select value={formData.experience} onValueChange={(value) => handleInputChange('experience', value)}>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Selecione..." />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="menos-1-ano">Menos de 1 ano</SelectItem>
+                            <SelectItem value="1-3-anos">1 a 3 anos</SelectItem>
+                            <SelectItem value="3-5-anos">3 a 5 anos</SelectItem>
+                            <SelectItem value="mais-5-anos">Mais de 5 anos</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-foreground mb-2">
+                          Volume de compra mensal
+                        </label>
+                        <Select value={formData.averageMonthlyPurchase} onValueChange={(value) => handleInputChange('averageMonthlyPurchase', value)}>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Selecione..." />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="ate-500">Até R$ 500/mês</SelectItem>
+                            <SelectItem value="500-1500">R$ 500 a R$ 1.500/mês</SelectItem>
+                            <SelectItem value="1500-3000">R$ 1.500 a R$ 3.000/mês</SelectItem>
+                            <SelectItem value="acima-3000">Acima de R$ 3.000/mês</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-foreground mb-3">
+                        Qual o seu público-alvo? (Selecione todas as opções aplicáveis)
+                      </label>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        {[
+                          { value: 'tutores-individuais', label: 'Tutores Individuais' },
+                          { value: 'criadores', label: 'Criadores' },
+                          { value: 'hoteis-pets', label: 'Hotéis para Pets' },
+                          { value: 'veterinarias', label: 'Clínicas Veterinárias' },
+                          { value: 'revendedores', label: 'Outros Revendedores' }
+                        ].map((option) => (
+                          <div key={option.value} className="flex items-center space-x-2">
+                            <Checkbox
+                              id={option.value}
+                              checked={formData.targetMarket.includes(option.value)}
+                              onCheckedChange={(checked) => {
+                                if (checked) {
+                                  handleInputChange('targetMarket', [...formData.targetMarket, option.value]);
+                                } else {
+                                  handleInputChange('targetMarket', formData.targetMarket.filter(item => item !== option.value));
+                                }
+                              }}
+                            />
+                            <label htmlFor={option.value} className="text-sm text-foreground cursor-pointer">
+                              {option.label}
+                            </label>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="flex items-center space-x-2">
+                      <Checkbox
+                        id="hasPhysicalStore"
+                        checked={formData.hasPhysicalStore}
+                        onCheckedChange={(checked) => handleInputChange('hasPhysicalStore', !!checked)}
+                      />
+                      <label htmlFor="hasPhysicalStore" className="text-sm text-foreground cursor-pointer">
+                        Possuo loja física para receber clientes
+                      </label>
+                    </div>
+
                     <div>
                       <label className="block text-sm font-medium text-foreground mb-2">
                         Número aproximado de clientes por mês
@@ -408,18 +554,6 @@ export default function PartnerRegistration() {
                         value={formData.monthlyCustomers}
                         onChange={(e) => handleInputChange('monthlyCustomers', e.target.value)}
                         placeholder="Ex: 200"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-foreground mb-2">
-                        Experiência com petiscos naturais
-                      </label>
-                      <Textarea
-                        value={formData.experience}
-                        onChange={(e) => handleInputChange('experience', e.target.value)}
-                        placeholder="Conte-nos sobre sua experiência vendendo petiscos naturais..."
-                        rows={3}
                       />
                     </div>
 

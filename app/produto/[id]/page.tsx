@@ -4,7 +4,6 @@ import { Metadata } from 'next';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { generateStructuredData, structuredDataTemplates } from '@/lib/seo';
 import { Heart, Star, Shield, Leaf, Award, ArrowLeft, ShoppingBag, CheckCircle } from 'lucide-react';
 
 interface ProductDetailProps {

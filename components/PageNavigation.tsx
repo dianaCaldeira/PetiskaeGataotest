@@ -1,7 +1,9 @@
+'use client';
+
 import React from 'react';
+import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, Home } from 'lucide-react';
 
 interface NavigationLink {
@@ -25,7 +27,7 @@ const PageNavigation: React.FC<PageNavigationProps> = ({
   relatedPages = [],
   showHomeLink = true
 }) => {
-  const navigate = useNavigate();
+  const router = useRouter();
 
   return (
     <div className="space-y-8">
@@ -35,7 +37,7 @@ const PageNavigation: React.FC<PageNavigationProps> = ({
           {previousPage ? (
             <Button
               variant="outline"
-              onClick={() => navigate(previousPage.path)}
+              onClick={() => router.push(previousPage.path)}
               className="flex items-center gap-2"
             >
               <ArrowLeft className="w-4 h-4" />
@@ -51,7 +53,7 @@ const PageNavigation: React.FC<PageNavigationProps> = ({
           {showHomeLink && (
             <Button
               variant="ghost"
-              onClick={() => navigate('/')}
+              onClick={() => router.push('/')}
               className="flex items-center gap-2"
             >
               <Home className="w-4 h-4" />
@@ -62,7 +64,7 @@ const PageNavigation: React.FC<PageNavigationProps> = ({
           {nextPage ? (
             <Button
               variant="outline"
-              onClick={() => navigate(nextPage.path)}
+              onClick={() => router.push(nextPage.path)}
               className="flex items-center gap-2"
             >
               <div className="text-right">
@@ -89,7 +91,7 @@ const PageNavigation: React.FC<PageNavigationProps> = ({
                 <Button
                   key={index}
                   variant="ghost"
-                  onClick={() => navigate(page.path)}
+                  onClick={() => router.push(page.path)}
                   className="h-auto p-4 justify-start text-left hover:bg-primary/10"
                 >
                   <div>

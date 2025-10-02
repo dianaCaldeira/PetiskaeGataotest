@@ -1,8 +1,13 @@
-import React from 'react';
+'use client';
+
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import PetIllustration from '@/components/PetIllustration';
 import { 
   Users, 
   Heart, 
@@ -13,10 +18,30 @@ import {
   Award,
   TrendingUp,
   Calendar,
-  MapPin
+  MapPin,
+  Play,
+  Quote
 } from 'lucide-react';
 
 export default function Community() {
+  const [photoForm, setPhotoForm] = useState({
+    name: '',
+    petName: '',
+    story: ''
+  });
+
+  interface Event {
+    date: string;
+    title: string;
+    type: 'event' | 'meetup' | 'training';
+  }
+
+  const mockEvents: Event[] = [
+    { date: '6', title: 'Encontro Canino no Parque', type: 'meetup' },
+    { date: '14', title: 'Feira de Adoção', type: 'event' },
+    { date: '21', title: 'Sessão de Treinamento ao Ar Livre', type: 'training' },
+  ];
+
   const communityStats = [
     {
       icon: Users,
@@ -135,6 +160,186 @@ export default function Community() {
         </div>
       </section>
 
+      {/* Photo Gallery & Events */}
+      <section className="py-20 px-4">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+            {/* Left Column - Photo Gallery */}
+            <div className="lg:col-span-2">
+              <Card className="bg-gradient-card border-0 rounded-3xl shadow-card p-8">
+                <CardContent className="p-0">
+                  <h2 className="text-2xl font-bold text-primary mb-6">Galeria de Fotos</h2>
+                  
+                  {/* Photo Grid */}
+                  <div className="grid grid-cols-2 gap-4 mb-8">
+                    {[1, 2, 3, 4].map((photo) => (
+                      <div key={photo} className="aspect-square bg-warm-beige/50 rounded-2xl flex items-center justify-center relative overflow-hidden group">
+                        <div className="absolute inset-0 bg-gradient-to-br from-pet-cream/50 to-warm-beige/30"></div>
+                        <div className="relative z-10">
+                          <PetIllustration 
+                            type={photo % 2 === 0 ? 'cat' : 'dog'} 
+                            size="md" 
+                          />
+                        </div>
+                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors"></div>
+                        <div className="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                          <Heart className="w-6 h-6 text-white" />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <Button variant="default" className="w-full">
+                    <Camera className="w-5 h-5 mr-2" />
+                    Enviar Sua Foto
+                  </Button>
+                </CardContent>
+              </Card>
+
+              {/* Submit Photo Form */}
+              <Card className="bg-gradient-card border-0 rounded-3xl shadow-card p-8 mt-8">
+                <CardContent className="p-0">
+                  <h3 className="text-xl font-bold text-primary mb-6">Enviar Sua Foto</h3>
+                  
+                  <div className="space-y-4">
+                    <Input
+                      placeholder="Nome"
+                      value={photoForm.name}
+                      onChange={(e) => setPhotoForm({...photoForm, name: e.target.value})}
+                      className="rounded-full"
+                    />
+                    
+                    <Input
+                      placeholder="Nome do Pet"
+                      value={photoForm.petName}
+                      onChange={(e) => setPhotoForm({...photoForm, petName: e.target.value})}
+                      className="rounded-full"
+                    />
+                    
+                    <Textarea
+                      placeholder="Conte a história do seu pet..."
+                      value={photoForm.story}
+                      onChange={(e) => setPhotoForm({...photoForm, story: e.target.value})}
+                      className="rounded-3xl min-h-[100px]"
+                    />
+                    
+                    <div className="border-2 border-dashed border-border rounded-3xl p-8 text-center">
+                      <Camera className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+                      <p className="text-muted-foreground mb-2">Clique para adicionar a foto</p>
+                      <p className="text-sm text-muted-foreground">PNG, JPG até 5MB</p>
+                    </div>
+                    
+                    <Button variant="default" className="w-full">
+                      Enviar Foto
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Right Column - Testimonials & Events */}
+            <div className="space-y-8">
+              {/* Testimonials */}
+              <Card className="bg-gradient-card border-0 rounded-3xl shadow-card p-6">
+                <CardContent className="p-0">
+                  <h3 className="text-xl font-bold text-primary mb-6">Depoimentos</h3>
+                  
+                  <div className="space-y-6">
+                    {/* Video Testimonial */}
+                    <div className="relative">
+                      <div className="aspect-video bg-warm-beige/50 rounded-2xl flex items-center justify-center relative overflow-hidden">
+                        <div className="absolute inset-0 bg-gradient-to-br from-pet-cream/50 to-warm-beige/30"></div>
+                        <div className="relative z-10 flex items-center justify-center">
+                          <PetIllustration type="both" size="md" className="mr-4" />
+                          <div className="bg-accent/90 w-12 h-12 rounded-full flex items-center justify-center">
+                            <Play className="w-6 h-6 text-white ml-1" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Text Testimonial */}
+                    <div className="bg-warm-beige/30 rounded-2xl p-4">
+                      <Quote className="w-6 h-6 text-accent mb-2" />
+                      <p className="text-muted-foreground mb-3 italic">
+                        Meus cães adoram esses petiscos! Eles são saudáveis e naturais.
+                      </p>
+                      <p className="text-sm font-semibold text-primary">— Ana</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Events Calendar */}
+              <Card className="bg-gradient-card border-0 rounded-3xl shadow-card p-6">
+                <CardContent className="p-0">
+                  <h3 className="text-xl font-bold text-primary mb-6">Eventos em Brasília</h3>
+                  
+                  {/* Mini Calendar */}
+                  <div className="bg-warm-beige/30 rounded-2xl p-4 mb-6">
+                    <div className="grid grid-cols-7 gap-1 text-center text-xs font-medium text-muted-foreground mb-2">
+                      <div>D</div><div>S</div><div>T</div><div>Q</div><div>Q</div><div>S</div><div>S</div>
+                    </div>
+                    <div className="grid grid-cols-7 gap-1 text-center text-sm">
+                      {Array.from({length: 35}, (_, i) => {
+                        const day = i - 3; // Start from day 1
+                        const isCurrentMonth = day > 0 && day <= 30;
+                        const hasEvent = [6, 14, 21].includes(day);
+                        
+                        return (
+                          <div key={i} className={`h-8 flex items-center justify-center rounded ${
+                            isCurrentMonth 
+                              ? hasEvent 
+                                ? 'bg-accent text-accent-foreground font-semibold' 
+                                : 'text-foreground hover:bg-accent/20' 
+                              : 'text-muted-foreground/40'
+                          }`}>
+                            {isCurrentMonth ? day : ''}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {/* Events List */}
+                  <div className="space-y-3">
+                    {mockEvents.map((event, index) => (
+                      <div key={index} className="flex items-center">
+                        <div className="bg-accent text-accent-foreground w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold mr-3">
+                          {event.date}
+                        </div>
+                        <div className="flex-1">
+                          <p className="font-medium text-primary text-sm">{event.title}</p>
+                          <div className="flex items-center text-xs text-muted-foreground">
+                            <MapPin className="w-3 h-3 mr-1" />
+                            <span>Brasília</span>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Month Navigation */}
+                  <div className="mt-6 pt-4 border-t border-border/20">
+                    <div className="flex justify-between items-center text-sm">
+                      <span className="font-semibold text-primary">Setembro</span>
+                      <div className="flex space-x-4">
+                        <button className="text-muted-foreground hover:text-primary">
+                          Setembro
+                        </button>
+                        <button className="text-accent font-semibold">
+                          Outubro
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Community Features */}
       <section className="py-20 px-4">
         <div className="max-w-7xl mx-auto">
@@ -192,7 +397,7 @@ export default function Community() {
                   </div>
                   
                   <p className="text-muted-foreground mb-6 italic">
-                    "{testimonial.text}"
+                    &ldquo;{testimonial.text}&rdquo;
                   </p>
                   
                   <div className="flex items-center gap-3">

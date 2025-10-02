@@ -3,99 +3,142 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import PetIllustration from '@/components/PetIllustration';
 import { Heart, Star, Quote, Users, TrendingUp, Award, MessageCircle, Camera } from 'lucide-react';
 
+interface SuccessStory {
+  id: number;
+  type: 'partner' | 'customer';
+  name: string;
+  location: string;
+  businessName?: string;
+  petName?: string;
+  story: string;
+  results: string[];
+  quote: string;
+  image?: string;
+  timeUsing?: string;
+  beforeAfter?: {
+    before: string;
+    after: string;
+  };
+}
+
 export default function SuccessStories() {
-  const stories = [
+  const successStories: SuccessStory[] = [
     {
       id: 1,
-      petName: "Luna",
-      petType: "Golden Retriever",
-      ownerName: "Maria Silva",
-      location: "Asa Norte, Brasília",
-      story: "Luna sempre foi uma cadela muito ativa, mas começou a apresentar problemas digestivos. Depois que mudamos para os petiscos da Petiska & Gatão, ela voltou a ser a mesma de sempre! Seu pelo está mais brilhante e ela adora os sabores naturais.",
-      beforeAfter: {
-        before: "Problemas digestivos e pelo opaco",
-        after: "Digestão saudável e pelo brilhante"
-      },
-      rating: 5,
-      image: "🐕",
-      timeUsing: "8 meses"
+      type: 'partner',
+      name: 'Marina Oliveira',
+      location: 'Asa Norte, Brasília',
+      businessName: 'Pet Palace',
+      story: 'Após 3 meses como parceira da Petiska & Gatão, nossa loja teve um crescimento incrível. Os clientes chegam pedindo especificamente pelos petiscos naturais.',
+      results: [
+        'Aumento de 40% no faturamento',
+        '150 novos clientes por mês',
+        'Produtos com maior margem',
+        'Clientes mais satisfeitos'
+      ],
+      quote: 'A qualidade do produto é excepcional e nossos clientes adoram!'
     },
     {
       id: 2,
-      petName: "Mimi",
-      petType: "Gato Persa",
-      ownerName: "João Santos",
-      location: "Taguatinga, Brasília",
-      story: "Mimi sempre foi muito exigente com comida. Tentamos várias marcas, mas ela rejeitava tudo. Os petiscos da Petiska & Gatão foram amor à primeira mordida! Agora ela até pede por mais e está muito mais sociável.",
+      type: 'customer',
+      name: 'Roberto Silva',
+      location: 'Águas Claras, Brasília',
+      petName: 'Thor',
+      story: 'Thor sempre teve problemas de pele e alergias. Desde que começamos com os petiscos naturais da Petiska & Gatão, a diferença é visível.',
+      results: [
+        'Pelo mais brilhante',
+        'Menos coceiras e alergias',
+        'Mais energia e disposição',
+        'Melhor digestão'
+      ],
+      quote: 'Thor nunca esteve tão saudável e feliz. Os petiscos naturais fizeram toda a diferença!',
+      image: '�',
+      timeUsing: '8 meses',
       beforeAfter: {
-        before: "Recusava a maioria dos petiscos",
-        after: "Adora os petiscos e pede mais"
-      },
-      rating: 5,
-      image: "🐱",
-      timeUsing: "6 meses"
+        before: 'Problemas de pele e alergias',
+        after: 'Pelo brilhante e saudável'
+      }
     },
     {
       id: 3,
-      petName: "Rex",
-      petType: "Vira-lata (Resgatado)",
-      ownerName: "Ana Costa",
-      location: "Águas Claras, Brasília",
-      story: "Rex foi resgatado da rua em estado muito debilitado. Com os cuidados veterinários e os petiscos naturais da Petiska & Gatão, ele se transformou completamente! Ganhou peso saudável, seu pelo cresceu lindo e ele está cheio de energia.",
-      beforeAfter: {
-        before: "Desnutrido e sem energia",
-        after: "Peso ideal e cheio de vida"
-      },
-      rating: 5,
-      image: "🐕",
-      timeUsing: "1 ano"
+      type: 'partner',
+      name: 'Carlos Eduardo',
+      location: 'Guará, Brasília',
+      businessName: 'Amigos Peludos',
+      story: 'A parceria com a Petiska & Gatão não trouxe apenas produtos de qualidade, mas uma estratégia completa de marketing que nos ajudou a crescer.',
+      results: [
+        'Vendas 60% maiores',
+        'Presença digital fortalecida',
+        'Materiais de marketing gratuitos',
+        'Suporte constante da equipe'
+      ],
+      quote: 'Uma parceria que realmente funciona! Os petiscos vendem rapidamente e de forma consistente.'
     },
     {
       id: 4,
-      petName: "Bella",
-      petType: "Shih Tzu",
-      ownerName: "Carlos Oliveira",
-      location: "Asa Sul, Brasília",
-      story: "Bella tinha alergia alimentar e coceira constante. Depois de muitas tentativas, encontramos os petiscos naturais da Petiska & Gatão. Em poucas semanas, a coceira diminuiu drasticamente e ela está muito mais feliz!",
+      type: 'customer',
+      name: 'Juliana Costa',
+      location: 'Asa Sul, Brasília',
+      petName: 'Luna e Mimi',
+      story: 'Tenho uma cadela e uma gata, e encontrar petiscos que ambas gostassem era um desafio. Com os produtos da Petiska & Gatão, as duas ficam igualmente felizes.',
+      results: [
+        'Petiscos para ambos os pets',
+        'Ingredientes 100% naturais',
+        'Fácil de encontrar em Brasília',
+        'Preço justo'
+      ],
+      quote: 'Luna e Mimi disputam os petiscos! É incrível ver como elas adoram.',
+      image: '🐕🐱',
+      timeUsing: '6 meses',
       beforeAfter: {
-        before: "Alergia alimentar e coceira",
-        after: "Pele saudável e sem coceira"
-      },
-      rating: 5,
-      image: "🐕",
-      timeUsing: "4 meses"
+        before: 'Dificuldade em encontrar petiscos para ambos',
+        after: 'Ambos adoram e disputam os petiscos'
+      }
     },
     {
       id: 5,
-      petName: "Simba",
-      petType: "Gato SRD",
-      ownerName: "Fernanda Lima",
-      location: "Ceilândia, Brasília",
-      story: "Simba estava acima do peso e o veterinário recomendou petiscos mais saudáveis. Com os produtos da Petiska & Gatão e exercícios, ele perdeu peso de forma saudável e está mais ativo que nunca!",
+      type: 'customer',
+      name: 'Ana Costa',
+      location: 'Taguatinga, Brasília',
+      petName: 'Rex',
+      story: 'Rex foi resgatado da rua em estado muito debilitado. Com os cuidados veterinários e os petiscos naturais da Petiska & Gatão, ele se transformou completamente!',
+      results: [
+        'Ganho de peso saudável',
+        'Pelo cresceu lindo',
+        'Cheio de energia',
+        'Totalmente recuperado'
+      ],
+      quote: 'Rex é a prova de que amor e alimentação natural fazem milagres!',
+      image: '🐕',
+      timeUsing: '1 ano',
       beforeAfter: {
-        before: "Sobrepeso e sedentário",
-        after: "Peso ideal e muito ativo"
-      },
-      rating: 5,
-      image: "🐱",
-      timeUsing: "10 meses"
+        before: 'Desnutrido e sem energia',
+        after: 'Peso ideal e cheio de vida'
+      }
     },
     {
       id: 6,
-      petName: "Thor",
-      petType: "Pastor Alemão",
-      ownerName: "Roberto Mendes",
-      location: "Sobradinho, Brasília",
-      story: "Thor é um cão de trabalho e precisa de muita energia. Os petiscos da Petiska & Gatão se tornaram sua recompensa favorita durante os treinos. Ele melhorou o foco e a disposição para as atividades!",
+      type: 'customer',
+      name: 'Maria Silva',
+      location: 'Asa Norte, Brasília',
+      petName: 'Luna',
+      story: 'Luna sempre foi uma cadela muito ativa, mas começou a apresentar problemas digestivos. Depois que mudamos para os petiscos da Petiska & Gatão, ela voltou a ser a mesma de sempre!',
+      results: [
+        'Digestão saudável',
+        'Pelo brilhante',
+        'Mais energia',
+        'Adora os sabores'
+      ],
+      quote: 'Luna está radiante e feliz novamente. Recomendo para todos!',
+      image: '🐕',
+      timeUsing: '5 meses',
       beforeAfter: {
-        before: "Baixo interesse nos treinos",
-        after: "Motivado e focado nos exercícios"
-      },
-      rating: 5,
-      image: "🐕",
-      timeUsing: "1 ano e 2 meses"
+        before: 'Problemas digestivos e pelo opaco',
+        after: 'Digestão perfeita e pelo brilhante'
+      }
     }
   ];
 
@@ -168,65 +211,125 @@ export default function SuccessStories() {
               Histórias que Inspiram
             </h2>
             <p className="text-xl text-muted-foreground">
-              Cada pet tem uma história única de transformação
+              Parceiros e clientes que transformaram seus negócios e a vida de seus pets
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {stories.map((story) => (
-              <Card key={story.id} className="p-6 hover:shadow-lg transition-shadow">
-                <CardContent className="p-0">
-                  {/* Header */}
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="flex items-center gap-4">
-                      <div className="text-4xl">{story.image}</div>
+          <div className="space-y-12">
+            {successStories.map((story, index) => (
+              <Card key={story.id} className="bg-gradient-card border-0 rounded-3xl shadow-card overflow-hidden">
+                <div className={`grid grid-cols-1 lg:grid-cols-2 ${index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''}`}>
+                  {/* Story Content */}
+                  <CardContent className={`p-8 lg:p-12 ${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
+                    <div className="flex items-center mb-6">
+                      <Badge className={`${story.type === 'partner' ? 'bg-primary' : 'bg-accent'} text-white mr-4`}>
+                        {story.type === 'partner' ? 'Parceiro' : 'Cliente'}
+                      </Badge>
                       <div>
-                        <h3 className="text-xl font-bold text-primary">{story.petName}</h3>
-                        <p className="text-muted-foreground">{story.petType}</p>
+                        <h3 className="font-bold text-primary text-lg">{story.name}</h3>
+                        <p className="text-sm text-muted-foreground">
+                          {story.businessName ? `${story.businessName} - ${story.location}` : 
+                           story.petName ? `Tutor de ${story.petName} - ${story.location}` : story.location}
+                        </p>
                       </div>
                     </div>
-                    <div className="flex items-center gap-1">
-                      {[...Array(story.rating)].map((_, i) => (
-                        <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
-                      ))}
-                    </div>
-                  </div>
 
-                  {/* Story */}
-                  <div className="mb-6">
-                    <Quote className="w-6 h-6 text-accent mb-3" />
-                    <p className="text-muted-foreground italic leading-relaxed mb-4">
-                      "{story.story}"
+                    <Quote className="w-8 h-8 text-accent mb-4" />
+                    <blockquote className="text-lg text-muted-foreground italic mb-6 leading-relaxed">
+                      &ldquo;{story.quote}&rdquo;
+                    </blockquote>
+
+                    <p className="text-muted-foreground mb-6 leading-relaxed">
+                      {story.story}
                     </p>
-                  </div>
 
-                  {/* Before/After */}
-                  <div className="bg-gradient-card rounded-2xl p-4 mb-6">
-                    <h4 className="font-bold text-primary mb-3">Transformação:</h4>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                      <div>
-                        <div className="text-muted-foreground font-medium mb-1">Antes:</div>
-                        <div className="text-destructive">{story.beforeAfter.before}</div>
-                      </div>
-                      <div>
-                        <div className="text-muted-foreground font-medium mb-1">Depois:</div>
-                        <div className="text-accent font-medium">{story.beforeAfter.after}</div>
-                      </div>
+                    <div className="mb-6">
+                      <h4 className="font-semibold text-primary mb-3">
+                        {story.type === 'partner' ? 'Resultados Alcançados:' : 'Transformação:'}
+                      </h4>
+                      {story.type === 'partner' ? (
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                          {story.results.map((result, resultIndex) => (
+                            <div key={resultIndex} className="flex items-center">
+                              <Award className="w-4 h-4 text-accent mr-2 flex-shrink-0" />
+                              <span className="text-sm text-muted-foreground">{result}</span>
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-4">
+                            {story.results.map((result, resultIndex) => (
+                              <div key={resultIndex} className="flex items-center">
+                                <Award className="w-4 h-4 text-accent mr-2 flex-shrink-0" />
+                                <span className="text-sm text-muted-foreground">{result}</span>
+                              </div>
+                            ))}
+                          </div>
+                          {story.beforeAfter && (
+                            <div className="bg-warm-beige/30 rounded-2xl p-4">
+                              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                                <div>
+                                  <div className="text-muted-foreground font-medium mb-1">Antes:</div>
+                                  <div className="text-destructive">{story.beforeAfter.before}</div>
+                                </div>
+                                <div>
+                                  <div className="text-muted-foreground font-medium mb-1">Depois:</div>
+                                  <div className="text-accent font-medium">{story.beforeAfter.after}</div>
+                                </div>
+                              </div>
+                              {story.timeUsing && (
+                                <div className="mt-3 text-sm text-muted-foreground">
+                                  Usando há: <span className="font-medium">{story.timeUsing}</span>
+                                </div>
+                              )}
+                            </div>
+                          )}
+                        </>
+                      )}
                     </div>
-                  </div>
 
-                  {/* Footer */}
-                  <div className="flex items-center justify-between text-sm text-muted-foreground">
-                    <div>
-                      <div className="font-medium text-primary">{story.ownerName}</div>
-                      <div>{story.location}</div>
-                    </div>
-                    <div className="text-right">
-                      <div className="font-medium">Usando há:</div>
-                      <div>{story.timeUsing}</div>
+                    {story.type === 'partner' && (
+                      <Link href="/cadastro-parceiro">
+                        <Button variant="default" size="lg">
+                          Quero Ser Parceiro Também
+                        </Button>
+                      </Link>
+                    )}
+
+                    {story.type === 'customer' && (
+                      <Link href="/onde-encontrar">
+                        <Button variant="default" size="lg">
+                          Onde Encontrar Estes Petiscos
+                        </Button>
+                      </Link>
+                    )}
+                  </CardContent>
+
+                  {/* Visual Side */}
+                  <div className={`bg-warm-beige/50 flex items-center justify-center p-8 relative overflow-hidden ${index % 2 === 1 ? 'lg:col-start-1' : ''}`}>
+                    <div className="absolute inset-0 bg-gradient-to-br from-pet-cream/50 to-warm-beige/30"></div>
+                    <div className="relative z-10 text-center">
+                      {story.type === 'partner' ? (
+                        <div>
+                          <div className="bg-primary/20 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <Users className="w-10 h-10 text-primary" />
+                          </div>
+                          <PetIllustration type="both" size="lg" className="mt-4" />
+                        </div>
+                      ) : (
+                        <div>
+                          {story.image && (
+                            <div className="text-6xl mb-4">{story.image}</div>
+                          )}
+                          <div className="bg-accent/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mt-4">
+                            <Heart className="w-8 h-8 text-accent" />
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
-                </CardContent>
+                </div>
               </Card>
             ))}
           </div>

@@ -6,7 +6,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import InteractiveMap from '@/components/InteractiveMap';
-import { Search, MapPin, Phone, Clock, Navigation, Filter, Store, Heart } from 'lucide-react';
+import { Search, MapPin, Phone, Clock, Navigation, Store, Heart } from 'lucide-react';
 
 interface PetShop {
   id: number;

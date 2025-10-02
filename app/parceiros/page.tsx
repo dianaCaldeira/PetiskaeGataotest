@@ -13,13 +13,11 @@ import {
   Shield, 
   Star, 
   Quote, 
-  CheckCircle,
   BarChart3,
   Truck,
   HeadphonesIcon,
   Target,
   Award,
-  Clock,
   ArrowRight,
   Phone,
   Calculator
@@ -356,7 +354,7 @@ export default function ForPetShops() {
                   </div>
                   <Quote className="w-8 h-8 text-muted-foreground mb-4" />
                   <p className="text-muted-foreground mb-6 italic">
-                    "{testimonial.text}"
+                    &ldquo;{testimonial.text}&rdquo;
                   </p>
                   <div>
                     <div className="font-bold text-primary">{testimonial.name}</div>

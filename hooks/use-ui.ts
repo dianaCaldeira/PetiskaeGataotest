@@ -74,12 +74,12 @@ export function useUI() {
 /**
  * Hook for managing form state
  */
-export function useFormState<T extends Record<string, any>>(initialState: T) {
+export function useFormState<T extends Record<string, unknown>>(initialState: T) {
   const [state, setState] = useState(initialState);
   const [errors, setErrors] = useState<Partial<Record<keyof T, string>>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const updateField = (field: keyof T, value: any) => {
+  const updateField = (field: keyof T, value: unknown) => {
     setState(prev => ({ ...prev, [field]: value }));
     // Clear error when user starts typing
     if (errors[field]) {
@@ -101,15 +101,17 @@ export function useFormState<T extends Record<string, any>>(initialState: T) {
     setIsSubmitting(false);
   };
 
-  const validate = (validationRules: Partial<Record<keyof T, (value: any) => string | undefined>>) => {
+  const validate = (validationRules: Partial<Record<keyof T, (value: unknown) => string | undefined>>) => {
     const newErrors: Partial<Record<keyof T, string>> = {};
     let isValid = true;
 
     Object.entries(validationRules).forEach(([field, validator]) => {
-      const error = validator(state[field as keyof T]);
-      if (error) {
-        newErrors[field as keyof T] = error;
-        isValid = false;
+      if (validator) {
+        const error = validator(state[field as keyof T]);
+        if (error) {
+          newErrors[field as keyof T] = error;
+          isValid = false;
+        }
       }
     });
 

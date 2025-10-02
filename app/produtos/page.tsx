@@ -1,168 +1,235 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Heart, Leaf, Award, ShoppingBag, CheckCircle } from 'lucide-react';
+import PetIllustration from '@/components/PetIllustration';
+import { Heart, Star, Filter } from 'lucide-react';
+
+interface Product {
+  id: number;
+  name: string;
+  description: string;
+  category: string;
+  petType: 'dog' | 'cat' | 'both';
+  benefits: string[];
+  image?: string;
+}
+
+const mockProducts: Product[] = [
+  {
+    id: 1,
+    name: "Biscoito Natural para Cães",
+    description: "Um petisco crocante e saboroso para seu cão, feito com ingredientes naturais sem aditivos artificiais.",
+    category: "Biscoitos",
+    petType: "dog",
+    benefits: ["Promove saúde dental", "Suporte à digestão", "Rico em nutrientes essenciais"]
+  },
+  {
+    id: 2,
+    name: "Frango Desidratado",
+    description: "Feito apenas com peito de frango selecionado, sem conservantes, sem sal e sem temperos artificiais.",
+    category: "Carnes",
+    petType: "both",
+    benefits: ["100% natural", "Alto em proteínas", "Livre de conservantes"]
+  },
+  {
+    id: 3,
+    name: "Tempero Mágico de Ração",
+    description: "Nosso produto inovador que torna qualquer ração mais saborosa e atrativa para os pets.",
+    category: "Temperos",
+    petType: "both",
+    benefits: ["Aumenta palatabilidade", "Estimula apetite", "100% natural"]
+  },
+  {
+    id: 4,
+    name: "Petiscos de Batata Doce",
+    description: "Fatias desidratadas de batata doce, ricas em fibras e vitaminas.",
+    category: "Vegetais",
+    petType: "both",
+    benefits: ["Rico em fibras", "Fonte de vitaminas", "Baixo em gordura"]
+  },
+  {
+    id: 5,
+    name: "Mix de Frutas Desidratadas",
+    description: "Combinação especial de frutas desidratadas seguras para pets.",
+    category: "Frutas",
+    petType: "both",
+    benefits: ["Antioxidantes naturais", "Vitaminas", "Sabor adocicado natural"]
+  },
+  {
+    id: 6,
+    name: "Coração de Boi Desidratado",
+    description: "Petisco rico em proteínas e taurina, especialmente benéfico para gatos.",
+    category: "Carnes",
+    petType: "both",
+    benefits: ["Alto em taurina", "Fortalece músculos", "Saúde cardíaca"]
+  }
+];
+
+const categories = ["Todos", "Biscoitos", "Carnes", "Temperos", "Vegetais", "Frutas"];
+const petTypes = ["Todos", "Cães", "Gatos", "Ambos"];
 
 export default function Products() {
-  const products = [
-    {
-      id: 1,
-      description: "Deliciosos petiscos naturais especialmente desenvolvidos para cães",
-      features: ["100% Natural", "Rico em Proteínas", "Sem Conservantes"],
-      price: "A partir de R$ 15,00",
-      image: "/products/dog-treats.jpg"
-    },
-    {
-      id: 2,
-      name: "Petiscos para Gatos",
-      description: "Irresistíveis petiscos naturais que os gatos adoram",
-      features: ["100% Natural", "Alto Valor Nutricional", "Sabor Irresistível"],
-      price: "A partir de R$ 18,00",
-      image: "/products/cat-treats.jpg"
-    },
-    {
-      id: 3,
-      name: "Mix Especial",
-      description: "Combinação perfeita para casas com cães e gatos",
-      features: ["Para Cães e Gatos", "Variedade de Sabores", "Embalagem Econômica"],
-      price: "A partir de R$ 25,00",
-      image: "/products/mix-treats.jpg"
-    }
-  ];
+  const [selectedCategory, setSelectedCategory] = useState("Todos");
+  const [selectedPetType, setSelectedPetType] = useState("Todos");
+
+  const filteredProducts = mockProducts.filter(product => {
+    const categoryMatch = selectedCategory === "Todos" || product.category === selectedCategory;
+    const petTypeMatch = selectedPetType === "Todos" || 
+                        (selectedPetType === "Cães" && (product.petType === "dog" || product.petType === "both")) ||
+                        (selectedPetType === "Gatos" && (product.petType === "cat" || product.petType === "both")) ||
+                        (selectedPetType === "Ambos" && product.petType === "both");
+    
+    return categoryMatch && petTypeMatch;
+  });
 
   return (
-    <div className="min-h-screen bg-gradient-primary">
-      {/* Hero Section */}
-      <section className="py-20 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <Badge className="bg-primary text-primary-foreground px-6 py-2 mb-6 text-lg">
-              Nossos Produtos
-            </Badge>
-            <h1 className="text-5xl md:text-6xl font-bold text-primary mb-6 leading-tight">
-              Petiscos <span className="text-accent">Artesanais</span><br />
-              Para Seu <span className="text-accent">Pet</span>
-            </h1>
-            <p className="text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
-              Descubra nossa linha completa de petiscos 100% naturais, desenvolvidos 
-              especialmente para proporcionar alegria e saúde aos seus companheiros.
-            </p>
-          </div>
+    <div className="min-h-screen bg-gradient-primary py-12">
+      <div className="max-w-7xl mx-auto px-4">
+        {/* Header */}
+        <div className="text-center mb-12">
+          <Badge className="bg-primary text-primary-foreground px-6 py-2 mb-4">
+            Petiska & Gatão
+          </Badge>
+          <h1 className="text-4xl md:text-5xl font-bold text-primary mb-4">
+            Nossos Petiscos
+          </h1>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Petiscos 100% naturais feitos com amor para cães e gatos
+          </p>
         </div>
-      </section>
 
-      {/* Produtos */}
-      <section className="py-20 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
-            {products.map((product) => (
-              <Card key={product.id} className="hover:shadow-lg transition-shadow">
-                <CardHeader>
-                  <div className="w-full h-48 bg-gradient-card rounded-lg mb-4 flex items-center justify-center">
-                    <ShoppingBag className="w-16 h-16 text-primary" />
-                  </div>
-                  <CardTitle className="text-2xl text-primary">{product.name}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground mb-4">{product.description}</p>
-                  
-                  <div className="space-y-2 mb-4">
-                    {product.features.map((feature, index) => (
-                      <div key={index} className="flex items-center gap-2">
-                        <CheckCircle className="w-4 h-4 text-accent" />
-                        <span className="text-sm text-muted-foreground">{feature}</span>
-                      </div>
+        {/* Filtros */}
+        <div className="mb-12">
+          <Card className="bg-gradient-card border-0 rounded-3xl shadow-card p-6">
+            <CardContent className="p-0">
+              <div className="flex items-center mb-4">
+                <Filter className="w-5 h-5 text-primary mr-2" />
+                <h3 className="font-semibold text-primary">Filtros</h3>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Filtro por Categoria */}
+                <div>
+                  <label className="block text-sm font-medium text-muted-foreground mb-2">
+                    Categoria
+                  </label>
+                  <div className="flex flex-wrap gap-2">
+                    {categories.map((category) => (
+                      <Button
+                        key={category}
+                        variant={selectedCategory === category ? "secondary" : "outline"}
+                        size="sm"
+                        onClick={() => setSelectedCategory(category)}
+                        className="rounded-full"
+                      >
+                        {category}
+                      </Button>
                     ))}
                   </div>
+                </div>
 
-                  <div className="flex items-center justify-between">
-                    <span className="text-lg font-bold text-primary">{product.price}</span>
-                    <Button variant="outline" size="sm">
-                      Ver Detalhes
-                    </Button>
+                {/* Filtro por Tipo de Pet */}
+                <div>
+                  <label className="block text-sm font-medium text-muted-foreground mb-2">
+                    Para qual pet?
+                  </label>
+                  <div className="flex flex-wrap gap-2">
+                    {petTypes.map((petType) => (
+                      <Button
+                        key={petType}
+                        variant={selectedPetType === petType ? "secondary" : "outline"}
+                        size="sm"
+                        onClick={() => setSelectedPetType(petType)}
+                        className="rounded-full"
+                      >
+                        {petType}
+                      </Button>
+                    ))}
                   </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-
-          {/* Diferenciais */}
-          <div className="bg-card rounded-3xl p-8 md:p-16 shadow-card mb-20">
-            <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold text-primary mb-6">
-                Por Que Escolher Nossos Petiscos?
-              </h2>
-              <p className="text-xl text-muted-foreground">
-                Conheça os diferenciais que fazem nossos produtos únicos
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <div className="text-center">
-                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Leaf className="w-8 h-8 text-primary" />
                 </div>
-                <h3 className="text-xl font-bold text-primary mb-3">100% Natural</h3>
-                <p className="text-muted-foreground">
-                  Sem conservantes artificiais, corantes ou aditivos químicos. 
-                  Apenas ingredientes naturais selecionados.
-                </p>
               </div>
-
-              <div className="text-center">
-                <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Heart className="w-8 h-8 text-accent" />
-                </div>
-                <h3 className="text-xl font-bold text-primary mb-3">Feito com Amor</h3>
-                <p className="text-muted-foreground">
-                  Cada petisco é produzido artesanalmente com muito carinho 
-                  e dedicação pelos nossos pets.
-                </p>
-              </div>
-
-              <div className="text-center">
-                <div className="w-16 h-16 bg-warm-beige/30 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Award className="w-8 h-8 text-primary" />
-                </div>
-                <h3 className="text-xl font-bold text-primary mb-3">Qualidade Premium</h3>
-                <p className="text-muted-foreground">
-                  Ingredientes de primeira qualidade e processos rigorosos 
-                  de controle de qualidade.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Call to Action */}
-          <div className="text-center">
-            <h2 className="text-3xl font-bold text-primary mb-6">
-              Onde Encontrar Nossos Produtos
-            </h2>
-            <p className="text-lg text-muted-foreground mb-8 max-w-3xl mx-auto">
-              Nossos petiscos estão disponíveis em mais de 50 pet shops parceiros 
-              espalhados por todo o Distrito Federal.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/onde-encontrar">
-                <Button variant="hero" size="lg">
-                  <ShoppingBag className="w-5 h-5 mr-2" />
-                  Encontrar Pet Shops
-                </Button>
-              </Link>
-              <Link href="/cadastro-parceiro">
-                <Button variant="outline" size="lg">
-                  Quero Revender
-                </Button>
-              </Link>
-            </div>
-          </div>
+            </CardContent>
+          </Card>
         </div>
-      </section>
+
+        {/* Grid de Produtos */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {filteredProducts.map((product) => (
+            <Card key={product.id} className="bg-gradient-card border-0 rounded-3xl shadow-card overflow-hidden group hover:shadow-lg transition-all duration-300">
+              {/* Imagem do Produto */}
+              <div className="h-48 bg-warm-beige/50 flex items-center justify-center relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-pet-cream/50 to-warm-beige/30"></div>
+                <div className="relative z-10 flex items-center justify-center">
+                  <PetIllustration 
+                    type={product.petType === 'both' ? 'both' : product.petType} 
+                    size="md" 
+                  />
+                  <div className="ml-4">
+                    <div className="w-16 h-16 bg-accent/20 rounded-full flex items-center justify-center">
+                      <Heart className="w-8 h-8 text-accent" />
+                    </div>
+                  </div>
+                </div>
+                <Badge className="absolute top-4 right-4 bg-accent text-accent-foreground">
+                  {product.category}
+                </Badge>
+              </div>
+
+              <CardContent className="p-6">
+                <h3 className="font-bold text-xl text-primary mb-2">
+                  {product.name}
+                </h3>
+                
+                <p className="text-muted-foreground mb-4 leading-relaxed">
+                  {product.description}
+                </p>
+
+                {/* Benefícios */}
+                <div className="mb-6">
+                  <h4 className="font-semibold text-primary mb-2">Benefícios:</h4>
+                  <ul className="space-y-1">
+                    {product.benefits.map((benefit, index) => (
+                      <li key={index} className="flex items-center text-sm text-muted-foreground">
+                        <Star className="w-3 h-3 text-accent mr-2" />
+                        {benefit}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <Link href={`/produto/${product.id}`}>
+                  <Button variant="secondary" className="w-full group-hover:scale-105 transition-transform">
+                    Onde Encontrar
+                  </Button>
+                </Link>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
+        {/* CTA */}
+        <div className="text-center mt-16">
+          <Card className="max-w-2xl mx-auto bg-primary text-primary-foreground border-0 rounded-3xl shadow-card p-8">
+            <CardContent className="p-0">
+              <h3 className="text-2xl font-bold mb-4">
+                Não encontrou o que procurava?
+              </h3>
+              <p className="text-primary-foreground/90 mb-6">
+                Entre em contato conosco! Estamos sempre desenvolvendo novos petiscos naturais.
+              </p>
+              <Link href="/contato">
+                <Button variant="secondary" size="lg">
+                  Falar Conosco
+                </Button>
+              </Link>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
     </div>
   );
 }

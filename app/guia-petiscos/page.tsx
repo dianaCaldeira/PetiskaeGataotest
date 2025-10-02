@@ -83,7 +83,7 @@ export default function GuiaPetiscos() {
       });
 
       setEmail('');
-    } catch (error) {
+    } catch {
       toast({
         title: "Erro ao enviar guia",
         description: "Tente novamente ou entre em contato conosco.",
@@ -302,7 +302,7 @@ export default function GuiaPetiscos() {
                   ))}
                 </div>
                 <p className="text-muted-foreground italic mb-4">
-                  "Incrível! Meu cão adora as receitas do guia. Já fiz várias e todas foram um sucesso!"
+                  &ldquo;Incrível! Meu cão adora as receitas do guia. Já fiz várias e todas foram um sucesso!&rdquo;
                 </p>
                 <div className="font-semibold text-primary">Maria Santos</div>
                 <div className="text-sm text-muted-foreground">Tutora da Luna</div>
@@ -317,7 +317,7 @@ export default function GuiaPetiscos() {
                   ))}
                 </div>
                 <p className="text-muted-foreground italic mb-4">
-                  "Finalmente um guia completo e confiável. As dicas de segurança alimentar são valiosas!"
+                  &ldquo;Finalmente um guia completo e confiável. As dicas de segurança alimentar são valiosas!&rdquo;
                 </p>
                 <div className="font-semibold text-primary">João Silva</div>
                 <div className="text-sm text-muted-foreground">Tutor do Rex</div>
@@ -332,7 +332,7 @@ export default function GuiaPetiscos() {
                   ))}
                 </div>
                 <p className="text-muted-foreground italic mb-4">
-                  "Minha gata, que é super exigente, aprovou todas as receitas que testei!"
+                  &ldquo;Minha gata, que é super exigente, aprovou todas as receitas que testei!&rdquo;
                 </p>
                 <div className="font-semibold text-primary">Ana Costa</div>
                 <div className="text-sm text-muted-foreground">Tutora da Mimi</div>

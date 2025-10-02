@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
-import { Search, Heart, BookOpen, Clock, User, ArrowRight, Filter } from 'lucide-react';
+import { Search, Heart, BookOpen, Clock, User, ArrowRight } from 'lucide-react';
 
 interface BlogPost {
   id: number;
