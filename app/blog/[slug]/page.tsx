@@ -6,15 +6,9 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Clock, User, ArrowLeft, Share2, Heart, BookOpen, Calendar, Tag } from 'lucide-react';
 
-interface ArticleDetailProps {
-  params: {
-    slug: string;
-  };
-}
 
 // Generate metadata for dynamic blog pages
-export async function generateMetadata({ params }: ArticleDetailProps): Promise<Metadata> {
-  const { slug } = params;
+export async function generateMetadata(): Promise<Metadata> {
   
   // In a real app, you would fetch article data from API based on slug
   const articleTitle = "Os Benefícios dos Petiscos Naturais para a Saúde do Seu Pet";
@@ -57,12 +51,10 @@ export async function generateMetadata({ params }: ArticleDetailProps): Promise<
   };
 }
 
-export default function ArticleDetail({ params }: ArticleDetailProps) {
-  const { slug } = params;
-
+export default function ArticleDetail() {
   // Mock article data - in real app, this would come from API based on slug
   const article = {
-    slug,
+    slug: "beneficios-petiscos-naturais",
     title: "Os Benefícios dos Petiscos Naturais para a Saúde do Seu Pet",
     category: "Alimentação",
     author: "Petiska & Gatão",

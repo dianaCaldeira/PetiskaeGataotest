@@ -83,7 +83,8 @@ export default function GuiaPetiscos() {
       });
 
       setEmail('');
-    } catch {
+    } catch (error) {
+      console.error('Erro ao enviar guia:', error);
       toast({
         title: "Erro ao enviar guia",
         description: "Tente novamente ou entre em contato conosco.",

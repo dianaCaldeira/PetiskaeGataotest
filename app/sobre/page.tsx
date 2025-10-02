@@ -8,7 +8,7 @@ import {
   Heart, 
   Shield, 
   Leaf, 
-  Users, 
+  Users,
   CheckCircle, 
   Star,
   Target,

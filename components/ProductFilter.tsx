@@ -181,7 +181,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
                         id={`pet-${type.value}`}
                         checked={filters.petType.includes(type.value)}
                         onCheckedChange={(checked) => 
-                          handleMultiSelectChange('petType', type.value, checked as boolean)
+                          handleMultiSelectChange('petType', type.value, Boolean(checked))
                         }
                       />
                       <label htmlFor={`pet-${type.value}`} className="text-sm cursor-pointer">
@@ -202,7 +202,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
                         id={`ingredient-${ingredient.value}`}
                         checked={filters.ingredients.includes(ingredient.value)}
                         onCheckedChange={(checked) => 
-                          handleMultiSelectChange('ingredients', ingredient.value, checked as boolean)
+                          handleMultiSelectChange('ingredients', ingredient.value, Boolean(checked))
                         }
                       />
                       <label htmlFor={`ingredient-${ingredient.value}`} className="text-sm cursor-pointer">
@@ -223,7 +223,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
                         id={`benefit-${benefit.value}`}
                         checked={filters.benefits.includes(benefit.value)}
                         onCheckedChange={(checked) => 
-                          handleMultiSelectChange('benefits', benefit.value, checked as boolean)
+                          handleMultiSelectChange('benefits', benefit.value, Boolean(checked))
                         }
                       />
                       <label htmlFor={`benefit-${benefit.value}`} className="text-sm cursor-pointer">

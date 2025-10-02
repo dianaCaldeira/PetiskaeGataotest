@@ -6,15 +6,9 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Heart, Star, Shield, Leaf, Award, ArrowLeft, ShoppingBag, CheckCircle } from 'lucide-react';
 
-interface ProductDetailProps {
-  params: {
-    id: string;
-  };
-}
 
 // Generate metadata for dynamic product pages
-export async function generateMetadata({ params }: ProductDetailProps): Promise<Metadata> {
-  const { id } = params;
+export async function generateMetadata(): Promise<Metadata> {
   
   // In a real app, you would fetch product data from API
   const productName = "Biscoito Natural para Cães";
@@ -48,12 +42,11 @@ export async function generateMetadata({ params }: ProductDetailProps): Promise<
   };
 }
 
-export default function ProductDetail({ params }: ProductDetailProps) {
-  const { id } = params;
+export default function ProductDetail() {
 
   // Mock product data - in real app, this would come from API
   const product = {
-    id: parseInt(id) || 1,
+    id: 1,
     name: "Biscoito Natural para Cães",
     category: "Biscoitos",
     price: "R$ 15,90",
