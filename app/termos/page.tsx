@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { FileText, Scale, Shield, AlertTriangle, Calendar, ArrowLeft, CheckCircle } from 'lucide-react';
+import Breadcrumb from '@/components/Breadcrumb';
 
 export default function Terms() {
   const lastUpdated = "15 de Janeiro de 2024";
@@ -60,6 +61,7 @@ export default function Terms() {
 
   return (
     <div className="min-h-screen bg-gradient-primary">
+      <Breadcrumb items={[{ label: 'Termos de Uso' }]} />
       {/* Header */}
       <section className="py-20 px-4">
         <div className="max-w-4xl mx-auto">

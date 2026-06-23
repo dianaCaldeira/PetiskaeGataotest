@@ -2,11 +2,12 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import PetIllustration from '@/components/PetIllustration';
-import { Heart, Star, Filter } from 'lucide-react';
+import Breadcrumb from '@/components/Breadcrumb';
+import { Star, Filter } from 'lucide-react';
 
 interface Product {
   id: number;
@@ -15,61 +16,74 @@ interface Product {
   category: string;
   petType: 'dog' | 'cat' | 'both';
   benefits: string[];
-  image?: string;
+  image: string;
+  weight: string;
 }
 
 const mockProducts: Product[] = [
   {
     id: 1,
-    name: "Biscoito Natural para Cães",
-    description: "Um petisco crocante e saboroso para seu cão, feito com ingredientes naturais sem aditivos artificiais.",
-    category: "Biscoitos",
-    petType: "dog",
-    benefits: ["Promove saúde dental", "Suporte à digestão", "Rico em nutrientes essenciais"]
+    name: "Mix de Frutas Desidratadas",
+    description: "Combinação especial de frutas desidratadas 100% naturais, sem conservantes ou corantes.",
+    category: "Frutas",
+    petType: "both",
+    benefits: ["Antioxidantes naturais", "Rico em vitaminas", "Sabor adocicado natural"],
+    image: "/imagens/produtos/IMG-20250620-WA0139.jpg",
+    weight: "50g"
   },
   {
     id: 2,
-    name: "Frango Desidratado",
-    description: "Feito apenas com peito de frango selecionado, sem conservantes, sem sal e sem temperos artificiais.",
-    category: "Carnes",
+    name: "Mix de Legumes Desidratados",
+    description: "Legumes desidratados artesanalmente, perfeitos como complemento alimentar natural para pets.",
+    category: "Legumes",
     petType: "both",
-    benefits: ["100% natural", "Alto em proteínas", "Livre de conservantes"]
+    benefits: ["Rico em fibras", "Fonte de vitaminas", "Sem conservantes"],
+    image: "/imagens/produtos/IMG-20250620-WA0140.jpg",
+    weight: "50g"
   },
   {
     id: 3,
-    name: "Tempero Mágico de Ração",
-    description: "Nosso produto inovador que torna qualquer ração mais saborosa e atrativa para os pets.",
-    category: "Temperos",
+    name: "Alimentação Natural de Coração de Boi e Legumes",
+    description: "Refeição natural com coração de boi e legumes desidratados. Rico em taurina e proteínas.",
+    category: "Refeições",
     petType: "both",
-    benefits: ["Aumenta palatabilidade", "Estimula apetite", "100% natural"]
+    benefits: ["Alto em taurina", "Fortalece músculos", "Saúde cardíaca"],
+    image: "/imagens/produtos/IMG-20250620-WA0141.jpg",
+    weight: "90g"
   },
   {
     id: 4,
-    name: "Petiscos de Batata Doce",
-    description: "Fatias desidratadas de batata doce, ricas em fibras e vitaminas.",
-    category: "Vegetais",
+    name: "Temperos Naturais para Ração",
+    description: "Nosso tempero mágico em 3 sabores: Filé Suíno, Frango e Coração de Boi. Torna qualquer ração irresistível.",
+    category: "Temperos",
     petType: "both",
-    benefits: ["Rico em fibras", "Fonte de vitaminas", "Baixo em gordura"]
+    benefits: ["Aumenta palatabilidade", "Estimula apetite", "100% natural"],
+    image: "/imagens/produtos/IMG-20250620-WA0142.jpg",
+    weight: "50g"
   },
   {
     id: 5,
-    name: "Mix de Frutas Desidratadas",
-    description: "Combinação especial de frutas desidratadas seguras para pets.",
-    category: "Frutas",
+    name: "Alimentação Natural de Filé Suíno e Legumes",
+    description: "Filé suíno com legumes desidratados artesanalmente. Proteína de alta qualidade para seu pet.",
+    category: "Refeições",
     petType: "both",
-    benefits: ["Antioxidantes naturais", "Vitaminas", "Sabor adocicado natural"]
+    benefits: ["Alto em proteínas", "Sem conservantes", "Ingredientes selecionados"],
+    image: "/imagens/produtos/IMG-20250620-WA0143.jpg",
+    weight: "50g"
   },
   {
     id: 6,
-    name: "Coração de Boi Desidratado",
-    description: "Petisco rico em proteínas e taurina, especialmente benéfico para gatos.",
-    category: "Carnes",
+    name: "Alimentação Natural de Frango e Legumes",
+    description: "Frango com legumes desidratados, uma opção leve e nutritiva para cães e gatos.",
+    category: "Refeições",
     petType: "both",
-    benefits: ["Alto em taurina", "Fortalece músculos", "Saúde cardíaca"]
+    benefits: ["Leve e nutritivo", "Fácil digestão", "100% natural"],
+    image: "/imagens/produtos/IMG-20250620-WA0144.jpg",
+    weight: "50g"
   }
 ];
 
-const categories = ["Todos", "Biscoitos", "Carnes", "Temperos", "Vegetais", "Frutas"];
+const categories = ["Todos", "Refeições", "Temperos", "Frutas", "Legumes"];
 const petTypes = ["Todos", "Cães", "Gatos", "Ambos"];
 
 export default function Products() {
@@ -88,6 +102,7 @@ export default function Products() {
 
   return (
     <div className="min-h-screen bg-gradient-primary py-12">
+      <Breadcrumb items={[{ label: 'Produtos' }]} />
       <div className="max-w-7xl mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-12">
@@ -161,21 +176,19 @@ export default function Products() {
           {filteredProducts.map((product) => (
             <Card key={product.id} className="bg-gradient-card border-0 rounded-3xl shadow-card overflow-hidden group hover:shadow-lg transition-all duration-300">
               {/* Imagem do Produto */}
-              <div className="h-48 bg-warm-beige/50 flex items-center justify-center relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-pet-cream/50 to-warm-beige/30"></div>
-                <div className="relative z-10 flex items-center justify-center">
-                  <PetIllustration 
-                    type={product.petType === 'both' ? 'both' : product.petType} 
-                    size="md" 
-                  />
-                  <div className="ml-4">
-                    <div className="w-16 h-16 bg-accent/20 rounded-full flex items-center justify-center">
-                      <Heart className="w-8 h-8 text-accent" />
-                    </div>
-                  </div>
-                </div>
-                <Badge className="absolute top-4 right-4 bg-accent text-accent-foreground">
+              <div className="h-56 bg-warm-beige/30 relative overflow-hidden">
+                <Image
+                  src={product.image}
+                  alt={product.name}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
+                <Badge className="absolute top-4 right-4 bg-accent text-accent-foreground z-10">
                   {product.category}
+                </Badge>
+                <Badge className="absolute top-4 left-4 bg-primary text-primary-foreground z-10">
+                  {product.weight}
                 </Badge>
               </div>
 

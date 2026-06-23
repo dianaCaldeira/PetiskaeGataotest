@@ -22,6 +22,7 @@ import {
   Award,
   TrendingUp
 } from 'lucide-react';
+import Breadcrumb from '@/components/Breadcrumb';
 
 interface PartnerFormData {
   petshopName: string;
@@ -217,6 +218,7 @@ ${formData.expectations || 'Não informado'}
 
   return (
     <div className="min-h-screen bg-gradient-primary">
+      <Breadcrumb items={[{ label: 'Para Pet Shops', href: '/parceiros' }, { label: 'Cadastro de Parceiro' }]} />
       {/* Hero Section */}
       <section className="py-20 px-4">
         <div className="max-w-7xl mx-auto">
@@ -268,9 +270,61 @@ ${formData.expectations || 'Não informado'}
                 </p>
               </div>
 
+              {/* Progress indicator */}
+              <div className="mb-10">
+                <div className="flex items-center justify-between mb-3">
+                  {[
+                    { icon: Store, label: 'Pet Shop' },
+                    { icon: User, label: 'Proprietário' },
+                    { icon: MapPin, label: 'Localização' },
+                    { icon: FileText, label: 'Comercial' },
+                  ].map((step, index) => {
+                    const StepIcon = step.icon;
+                    const sectionFields: (keyof PartnerFormData)[][] = [
+                      ['petshopName', 'cnpj'],
+                      ['ownerName', 'phone', 'email'],
+                      ['address', 'neighborhood'],
+                      [],
+                    ];
+                    const filled = sectionFields[index].every(f => {
+                      const v = formData[f];
+                      return typeof v === 'string' ? v.trim() !== '' : !!v;
+                    });
+                    return (
+                      <div key={index} className="flex flex-col items-center flex-1">
+                        <div className={`w-10 h-10 rounded-full flex items-center justify-center mb-1 transition-colors ${
+                          filled ? 'bg-accent text-accent-foreground' : 'bg-muted text-muted-foreground'
+                        }`}>
+                          {filled ? <CheckCircle className="w-5 h-5" /> : <StepIcon className="w-5 h-5" />}
+                        </div>
+                        <span className="text-xs text-muted-foreground hidden sm:block">{step.label}</span>
+                        {index < 3 && (
+                          <div className={`hidden sm:block h-0.5 w-full mt-5 absolute ${filled ? 'bg-accent' : 'bg-muted'}`} />
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+                <div className="w-full bg-muted rounded-full h-2">
+                  <div
+                    className="bg-accent h-2 rounded-full transition-all duration-500"
+                    style={{
+                      width: `${Math.round(
+                        (['petshopName', 'cnpj', 'ownerName', 'phone', 'email', 'address', 'neighborhood'] as (keyof PartnerFormData)[])
+                          .filter(f => { const v = formData[f]; return typeof v === 'string' ? v.trim() !== '' : !!v; }).length / 7 * 100
+                      )}%`
+                    }}
+                  />
+                </div>
+                <p className="text-xs text-muted-foreground text-center mt-2">
+                  {(['petshopName', 'cnpj', 'ownerName', 'phone', 'email', 'address', 'neighborhood'] as (keyof PartnerFormData)[])
+                    .filter(f => { const v = formData[f]; return typeof v === 'string' ? v.trim() !== '' : !!v; }).length} de 7 campos obrigatórios preenchidos
+                </p>
+              </div>
+
               <form onSubmit={handleSubmit} className="space-y-8">
                 {/* Dados do Pet Shop */}
-                <div>
+                <div id="section-petshop">
                   <h3 className="text-xl font-bold text-primary mb-4 flex items-center gap-2">
                     <Store className="w-5 h-5" />
                     Dados do Pet Shop

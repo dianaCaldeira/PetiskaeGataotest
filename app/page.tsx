@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -52,24 +53,22 @@ export default function Home() {
                 </div>
               </div>
               
-              {/* Pets Illustration */}
-              <div className="flex justify-center items-center my-12">
-                <div className="relative">
-                  {/* Gato */}
-                  <div className="absolute -left-20 -top-4">
-                    <PetIllustration type="cat" size="lg" />
-                  </div>
-                  
-                  {/* Cachorro */}
-                  <div className="absolute -right-20 -top-4">
-                    <PetIllustration type="dog" size="lg" />
-                  </div>
-                  
-                  {/* Centro com folhas decorativas */}
-                  <div className="w-32 h-32 bg-leaf-green/30 rounded-full flex items-center justify-center">
-                    <Leaf className="w-12 h-12 text-primary" />
-                  </div>
-                </div>
+              {/* Mascotes e Produtos */}
+              <div className="flex justify-center items-center my-12 gap-6">
+                <Image
+                  src="/imagens/personagens/PETISKA_e_GATAO_abracados_vetor.png"
+                  alt="Petiska e Gatão abraçados"
+                  width={200}
+                  height={200}
+                  className="w-36 h-36 md:w-48 md:h-48 object-contain drop-shadow-lg"
+                />
+                <Image
+                  src="/imagens/produtos/IMG-20250620-WA0145.jpg"
+                  alt="Linha completa de produtos Petiska & Gatão"
+                  width={300}
+                  height={200}
+                  className="w-48 h-32 md:w-64 md:h-44 object-cover rounded-2xl shadow-card"
+                />
               </div>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">

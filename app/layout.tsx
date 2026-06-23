@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { defaultMetadata } from "@/lib/seo";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import ScrollToTop from "@/components/ScrollToTop";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,14 +29,14 @@ export default function RootLayout({
       <head>
         {/* PWA Manifest */}
         <link rel="manifest" href="/manifest.json" />
-        
+
         {/* Favicon and Icons */}
         <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
-        
+
         {/* Theme Colors */}
         <meta name="theme-color" content="#059669" />
         <meta name="msapplication-TileColor" content="#059669" />
-        
+
         {/* Viewport */}
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
       </head>
@@ -43,10 +44,11 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Navigation />
-        <main>
+        <main id="main-content">
           {children}
         </main>
         <Footer />
+        <ScrollToTop />
         <Toaster />
       </body>
     </html>

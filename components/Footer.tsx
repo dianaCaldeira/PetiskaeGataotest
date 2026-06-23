@@ -1,39 +1,57 @@
 "use client";
 
-import React from 'react';
 import Link from 'next/link';
-import { Facebook, Instagram, Mail, Phone, MapPin } from 'lucide-react';
+import Image from 'next/image';
+import { Mail, Phone, MapPin } from 'lucide-react';
+import { FaFacebook, FaInstagram, FaWhatsapp } from 'react-icons/fa';
 
 const Footer = () => {
   return (
-    <footer className="bg-primary text-primary-foreground">
+    <footer className="bg-primary text-primary-foreground" role="contentinfo">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Logo e Descrição */}
           <div className="lg:col-span-2">
-            <div className="bg-accent text-accent-foreground px-4 py-2 rounded-full font-bold text-lg inline-block mb-4">
-              Petiska & Gatão
-            </div>
+            <Link href="/" className="inline-block mb-4">
+              <Image
+                src="/imagens/logo/Logo verde.png"
+                alt="Petiska & Gatão - Alimentação Natural"
+                width={150}
+                height={50}
+                className="h-12 w-auto brightness-0 invert"
+              />
+            </Link>
             <p className="text-primary-foreground/80 mb-4 leading-relaxed">
-              Petiscos 100% naturais feitos com amor em Brasília. Nutrição de verdade 
+              Petiscos 100% naturais feitos com amor em Brasília. Nutrição de verdade
               para cães e gatos, sem conservantes artificiais.
             </p>
-            <div className="flex space-x-4">
+            <div className="flex space-x-3">
               <a
-                href="https://instagram.com"
+                href="https://instagram.com/petiskaegatao"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-accent/20 p-2 rounded-full hover:bg-accent/30 transition-colors"
+                aria-label="Instagram da Petiska & Gatão"
+                className="bg-accent/20 p-2.5 rounded-full hover:bg-accent/30 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
               >
-                <Instagram className="h-5 w-5" />
+                <FaInstagram className="h-5 w-5" />
               </a>
               <a
-                href="https://facebook.com"
+                href="https://facebook.com/petiskaegatao"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-accent/20 p-2 rounded-full hover:bg-accent/30 transition-colors"
+                aria-label="Facebook da Petiska & Gatão"
+                className="bg-accent/20 p-2.5 rounded-full hover:bg-accent/30 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
               >
-                <Facebook className="h-5 w-5" />
+                <FaFacebook className="h-5 w-5" />
+              </a>
+              <a
+                href="https://wa.me/5561999999999"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="WhatsApp da Petiska & Gatão"
+                className="bg-accent/20 p-2.5 rounded-full hover:bg-accent/30 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+              >
+                <FaWhatsapp className="h-5 w-5" />
               </a>
             </div>
           </div>
@@ -43,28 +61,28 @@ const Footer = () => {
             <h3 className="font-semibold mb-4">Links Rápidos</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/produtos" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
+                <Link href="/produtos" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors focus-visible:outline-none focus-visible:underline">
                   Nossos Petiscos
                 </Link>
               </li>
               <li>
-                <Link href="/onde-encontrar" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
+                <Link href="/onde-encontrar" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors focus-visible:outline-none focus-visible:underline">
                   Onde Encontrar
                 </Link>
               </li>
               <li>
-                <Link href="/parceiros" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
+                <Link href="/parceiros" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors focus-visible:outline-none focus-visible:underline">
                   Seja Parceiro
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
+                <Link href="/blog" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors focus-visible:outline-none focus-visible:underline">
                   Blog
                 </Link>
               </li>
               <li>
-                <Link href="/comunidade" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
-                  Comunidade
+                <Link href="/faq" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors focus-visible:outline-none focus-visible:underline">
+                  Perguntas Frequentes
                 </Link>
               </li>
             </ul>
@@ -73,26 +91,40 @@ const Footer = () => {
           {/* Contato */}
           <div>
             <h3 className="font-semibold mb-4">Contato</h3>
-            <ul className="space-y-2">
-              <li className="flex items-center">
-                <Mail className="h-4 w-4 mr-2" />
-                <span className="text-primary-foreground/80">contato@petiskaegatao.com.br</span>
+            <ul className="space-y-3">
+              <li>
+                <a href="mailto:contato@petiskaegatao.com.br" className="flex items-center text-primary-foreground/80 hover:text-primary-foreground transition-colors focus-visible:outline-none focus-visible:underline">
+                  <Mail className="h-4 w-4 mr-2 flex-shrink-0" aria-hidden="true" />
+                  contato@petiskaegatao.com.br
+                </a>
               </li>
-              <li className="flex items-center">
-                <Phone className="h-4 w-4 mr-2" />
-                <span className="text-primary-foreground/80">(61) 9999-9999</span>
+              <li>
+                <a href="tel:+5561999999999" className="flex items-center text-primary-foreground/80 hover:text-primary-foreground transition-colors focus-visible:outline-none focus-visible:underline">
+                  <Phone className="h-4 w-4 mr-2 flex-shrink-0" aria-hidden="true" />
+                  (61) 99999-9999
+                </a>
               </li>
-              <li className="flex items-center">
-                <MapPin className="h-4 w-4 mr-2" />
-                <span className="text-primary-foreground/80">Brasília, DF</span>
+              <li className="flex items-center text-primary-foreground/80">
+                <MapPin className="h-4 w-4 mr-2 flex-shrink-0" aria-hidden="true" />
+                Brasília, DF
               </li>
             </ul>
+
+            {/* Links legais */}
+            <div className="mt-6 flex flex-col space-y-1">
+              <Link href="/privacidade" className="text-primary-foreground/60 text-sm hover:text-primary-foreground/80 transition-colors">
+                Política de Privacidade
+              </Link>
+              <Link href="/termos" className="text-primary-foreground/60 text-sm hover:text-primary-foreground/80 transition-colors">
+                Termos de Uso
+              </Link>
+            </div>
           </div>
         </div>
 
         <div className="border-t border-primary-foreground/20 mt-8 pt-8 text-center">
           <p className="text-primary-foreground/60">
-            © 2024 Petiska & Gatão. Todos os direitos reservados.
+            &copy; {new Date().getFullYear()} Petiska &amp; Gatão. Todos os direitos reservados.
           </p>
         </div>
       </div>

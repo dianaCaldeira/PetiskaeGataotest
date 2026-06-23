@@ -7,6 +7,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Search, Heart, BookOpen, Clock, User, ArrowRight } from 'lucide-react';
+import Breadcrumb from '@/components/Breadcrumb';
 
 interface BlogPost {
   id: number;
@@ -119,6 +120,7 @@ export default function Blog() {
 
   return (
     <div className="min-h-screen bg-gradient-primary">
+      <Breadcrumb items={[{ label: 'Blog' }]} />
       {/* Hero Section */}
       <section className="py-20 px-4">
         <div className="max-w-7xl mx-auto">

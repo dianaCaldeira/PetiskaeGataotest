@@ -2,9 +2,10 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Home, Search, ArrowLeft, Heart, MapPin, Phone } from 'lucide-react';
+import { Home, ArrowLeft, Heart, MapPin, Phone } from 'lucide-react';
 
 export default function NotFound() {
   return (
@@ -17,8 +18,21 @@ export default function NotFound() {
               <div className="text-8xl md:text-9xl font-bold text-primary/20 mb-4">
                 404
               </div>
-              <div className="w-24 h-24 bg-accent/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Search className="w-12 h-12 text-accent" />
+              <div className="flex items-end justify-center gap-2 mb-6">
+                <Image
+                  src="/imagens/personagens/GATAO_triste.png"
+                  alt="Gatão triste"
+                  width={100}
+                  height={100}
+                  className="w-20 h-20 md:w-24 md:h-24 object-contain"
+                />
+                <Image
+                  src="/imagens/personagens/PETISKA_2_triste.png"
+                  alt="Petiska triste"
+                  width={100}
+                  height={100}
+                  className="w-20 h-20 md:w-24 md:h-24 object-contain"
+                />
               </div>
             </div>
 

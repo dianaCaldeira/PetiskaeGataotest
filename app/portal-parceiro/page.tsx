@@ -24,6 +24,7 @@ import {
   Bell,
   Settings
 } from 'lucide-react';
+import Breadcrumb from '@/components/Breadcrumb';
 
 export default function PartnerPortal() {
   const { toast } = useToast();
@@ -81,6 +82,7 @@ export default function PartnerPortal() {
   if (!isLoggedIn) {
     return (
       <div className="min-h-screen bg-gradient-primary flex items-center justify-center px-4">
+        <Breadcrumb items={[{ label: 'Para Pet Shops', href: '/parceiros' }, { label: 'Portal do Parceiro' }]} />
         <div className="max-w-md w-full">
           <Card className="shadow-card">
             <CardContent className="p-8">
@@ -170,6 +172,7 @@ export default function PartnerPortal() {
 
   return (
     <div className="min-h-screen bg-gradient-primary">
+      <Breadcrumb items={[{ label: 'Para Pet Shops', href: '/parceiros' }, { label: 'Portal do Parceiro' }]} />
       {/* Header */}
       <section className="py-8 px-4 border-b bg-card/50">
         <div className="max-w-7xl mx-auto">

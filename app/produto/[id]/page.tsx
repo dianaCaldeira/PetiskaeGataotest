@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Metadata } from 'next';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -103,12 +104,15 @@ export default function ProductDetail() {
             <div>
               <Card className="shadow-card">
                 <CardContent className="p-0">
-                  <div className="h-96 bg-gradient-card rounded-lg flex items-center justify-center relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-pet-cream/50 to-warm-beige/30"></div>
-                    <div className="relative z-10 flex items-center justify-center">
-                      <div className="text-8xl">🦴</div>
-                    </div>
-                    <Badge className="absolute top-4 left-4 bg-accent text-accent-foreground">
+                  <div className="h-96 bg-gradient-card rounded-lg relative overflow-hidden">
+                    <Image
+                      src="/imagens/produtos/IMG-20250622-WA0003.jpg"
+                      alt={product.name}
+                      fill
+                      className="object-cover"
+                      priority
+                    />
+                    <Badge className="absolute top-4 left-4 bg-accent text-accent-foreground z-10">
                       {product.category}
                     </Badge>
                   </div>
@@ -283,18 +287,21 @@ export default function ProductDetail() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[1, 2, 3].map((item) => (
-              <Card key={item} className="hover:shadow-lg transition-shadow">
-                <CardContent className="p-6">
-                  <div className="h-48 bg-gradient-card rounded-lg mb-4 flex items-center justify-center">
-                    <div className="text-4xl">🦴</div>
+            {[
+              { name: "Mix de Frutas", img: "/imagens/produtos/IMG-20250620-WA0139.jpg", id: 1 },
+              { name: "Mix de Legumes", img: "/imagens/produtos/IMG-20250620-WA0140.jpg", id: 2 },
+              { name: "Temperos Naturais", img: "/imagens/produtos/IMG-20250620-WA0142.jpg", id: 4 },
+            ].map((item) => (
+              <Card key={item.id} className="hover:shadow-lg transition-shadow overflow-hidden">
+                <CardContent className="p-0">
+                  <div className="h-48 relative overflow-hidden">
+                    <Image src={item.img} alt={item.name} fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
                   </div>
-                  <h3 className="text-xl font-bold text-primary mb-2">Petisco Natural {item}</h3>
-                  <p className="text-muted-foreground mb-4">Delicioso petisco para seu pet</p>
-                  <div className="flex items-center justify-between">
-                    <span className="text-lg font-bold text-accent">R$ 12,90</span>
-                    <Link href={`/produto/${item + 1}`}>
-                      <Button variant="outline" size="sm">Ver Detalhes</Button>
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold text-primary mb-2">{item.name}</h3>
+                    <p className="text-muted-foreground mb-4">Petisco 100% natural</p>
+                    <Link href={`/produto/${item.id}`}>
+                      <Button variant="outline" size="sm" className="w-full">Ver Detalhes</Button>
                     </Link>
                   </div>
                 </CardContent>

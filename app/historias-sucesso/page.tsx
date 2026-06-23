@@ -5,6 +5,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import PetIllustration from '@/components/PetIllustration';
 import { Heart, Star, Quote, Users, TrendingUp, Award, MessageCircle, Camera } from 'lucide-react';
+import Breadcrumb from '@/components/Breadcrumb';
 
 interface SuccessStory {
   id: number;
@@ -167,6 +168,7 @@ export default function SuccessStories() {
 
   return (
     <div className="min-h-screen bg-gradient-primary">
+      <Breadcrumb items={[{ label: 'Histórias de Sucesso' }]} />
       {/* Hero Section */}
       <section className="py-20 px-4">
         <div className="max-w-7xl mx-auto">

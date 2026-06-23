@@ -22,6 +22,7 @@ import {
   Phone,
   Calculator
 } from 'lucide-react';
+import Breadcrumb from '@/components/Breadcrumb';
 
 export default function ForPetShops() {
   const [calculatorData, setCalculatorData] = useState({
@@ -121,6 +122,7 @@ export default function ForPetShops() {
 
   return (
     <div className="min-h-screen bg-gradient-primary">
+      <Breadcrumb items={[{ label: 'Para Pet Shops' }]} />
       {/* Hero Section */}
       <section className="py-20 px-4">
         <div className="max-w-7xl mx-auto">

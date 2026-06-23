@@ -52,3 +52,7 @@ migration.md
 seo-meta-tags.md
 livro-guia.md
 checklist-implementacoes-pendentes.md
+
+# arquivos de design grandes (excedem o limite de 100MB do GitHub)
+public/imagens/etiquetas/nova_etiqueta_frenteinferior.ai
+public/imagens/etiquetas/nova_etiqueta_frenteinferior.pdf

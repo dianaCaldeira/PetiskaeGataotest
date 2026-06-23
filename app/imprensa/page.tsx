@@ -16,6 +16,7 @@ import {
   Calendar,
   ExternalLink
 } from 'lucide-react';
+import Breadcrumb from '@/components/Breadcrumb';
 
 export default function Press() {
   const pressReleases = [
@@ -122,6 +123,7 @@ export default function Press() {
 
   return (
     <div className="min-h-screen bg-gradient-primary">
+      <Breadcrumb items={[{ label: 'Imprensa' }]} />
       {/* Hero Section */}
       <section className="py-20 px-4">
         <div className="max-w-7xl mx-auto">

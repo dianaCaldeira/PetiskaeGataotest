@@ -5,6 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { HelpCircle, MessageCircle, Heart, Package, Store, ShoppingCart, Stethoscope } from 'lucide-react';
+import Breadcrumb from '@/components/Breadcrumb';
 
 interface FAQItem {
   id: string;
@@ -104,6 +105,7 @@ export default function FAQ() {
 
   return (
     <div className="min-h-screen bg-gradient-primary">
+      <Breadcrumb items={[{ label: 'Perguntas Frequentes' }]} />
       {/* Hero Section */}
       <section className="py-20 px-4">
         <div className="max-w-7xl mx-auto">

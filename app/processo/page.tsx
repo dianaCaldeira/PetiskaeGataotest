@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { ChefHat, Leaf, Shield, Heart, Clock, Award, CheckCircle, Factory, Users, Truck } from 'lucide-react';
+import Breadcrumb from '@/components/Breadcrumb';
 
 export default function Process() {
   const processSteps = [
@@ -68,6 +69,7 @@ export default function Process() {
 
   return (
     <div className="min-h-screen bg-gradient-primary">
+      <Breadcrumb items={[{ label: 'Nosso Processo' }]} />
       {/* Hero Section */}
       <section className="py-20 px-4">
         <div className="max-w-7xl mx-auto">

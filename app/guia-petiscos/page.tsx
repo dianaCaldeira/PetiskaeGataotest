@@ -21,6 +21,7 @@ import {
   Leaf,
   Shield
 } from 'lucide-react';
+import Breadcrumb from '@/components/Breadcrumb';
 
 export default function GuiaPetiscos() {
   const { toast } = useToast();
@@ -97,6 +98,7 @@ export default function GuiaPetiscos() {
 
   return (
     <div className="min-h-screen bg-gradient-primary">
+      <Breadcrumb items={[{ label: 'Guia de Petiscos' }]} />
       {/* Hero Section */}
       <section className="py-20 px-4">
         <div className="max-w-7xl mx-auto">

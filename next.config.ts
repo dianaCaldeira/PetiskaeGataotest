@@ -6,11 +6,10 @@ const nextConfig: NextConfig = {
     formats: ['image/webp', 'image/avif'],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
-    domains: [
-      'localhost',
-      'petiskaegatao.com.br',
-      'images.unsplash.com',
-      'via.placeholder.com'
+    remotePatterns: [
+      { protocol: 'https', hostname: 'petiskaegatao.com.br' },
+      { protocol: 'https', hostname: 'images.unsplash.com' },
+      { protocol: 'http', hostname: 'localhost' },
     ],
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",

@@ -22,6 +22,7 @@ import {
   Play,
   Quote
 } from 'lucide-react';
+import Breadcrumb from '@/components/Breadcrumb';
 
 export default function Community() {
   const [photoForm, setPhotoForm] = useState({
@@ -125,6 +126,7 @@ export default function Community() {
 
   return (
     <div className="min-h-screen bg-gradient-primary">
+      <Breadcrumb items={[{ label: 'Comunidade' }]} />
       {/* Hero Section */}
       <section className="py-20 px-4">
         <div className="max-w-7xl mx-auto">

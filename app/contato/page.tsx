@@ -9,6 +9,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
 import PetIllustration from '@/components/PetIllustration';
+import Breadcrumb from '@/components/Breadcrumb';
 import { Mail, Phone, MapPin, MessageCircle, Send, Clock, AlertCircle, CheckCircle } from 'lucide-react';
 
 interface ContactFormData {
@@ -115,6 +116,7 @@ Enviado através do site da Petiska & Gatão 🐱`;
 
   return (
     <div className="min-h-screen bg-gradient-primary">
+      <Breadcrumb items={[{ label: 'Contato' }]} />
       {/* Hero Section */}
       <section className="py-20 px-4">
         <div className="max-w-7xl mx-auto">

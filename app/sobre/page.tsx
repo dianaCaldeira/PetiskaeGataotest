@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import PetIllustration from '@/components/PetIllustration';
+import Breadcrumb from '@/components/Breadcrumb';
 import { 
   Heart, 
   Shield, 
@@ -20,6 +21,7 @@ import {
 export default function About() {
   return (
     <div className="min-h-screen bg-gradient-primary">
+      <Breadcrumb items={[{ label: 'Sobre Nós' }]} />
       {/* Hero Section */}
       <section className="py-20 px-4">
         <div className="max-w-7xl mx-auto">

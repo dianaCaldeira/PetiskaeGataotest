@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import InteractiveMap from '@/components/InteractiveMap';
 import { Search, MapPin, Phone, Clock, Navigation, Store, Heart } from 'lucide-react';
+import Breadcrumb from '@/components/Breadcrumb';
 
 interface PetShop {
   id: number;
@@ -86,6 +87,7 @@ export default function WhereToFind() {
 
   return (
     <div className="min-h-screen bg-gradient-primary">
+      <Breadcrumb items={[{ label: 'Onde Encontrar' }]} />
       {/* Hero Section */}
       <section className="py-20 px-4">
         <div className="max-w-7xl mx-auto">
